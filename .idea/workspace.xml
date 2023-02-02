@@ -8,7 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0641f1d-d74d-4c69-970c-f95a31e78ee7" name="变更" comment="主分支第五次提交，更新了六个文件，成功进行基于马尔可夫的DQN训练。">
+    <list default="true" id="f0641f1d-d74d-4c69-970c-f95a31e78ee7" name="变更" comment="主分支第六次提交，更新了五个文件。">
       <change afterPath="$PROJECT_DIR$/模拟网络/model_1.h5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/模拟网络/dqn_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/dqn_network.py" afterDir="false" />
@@ -263,7 +263,7 @@
       <workItem from="1675280114247" duration="1280000" />
       <workItem from="1675281561483" duration="2110000" />
       <workItem from="1675317500499" duration="6264000" />
-      <workItem from="1675323830804" duration="6889000" />
+      <workItem from="1675323830804" duration="7217000" />
     </task>
     <task id="LOCAL-00001" summary="初始化 74个文件。">
       <created>1675264049408</created>
@@ -293,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675327340456</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="主分支第六次提交，更新了五个文件。">
+      <created>1675331131604</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1675331131604</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +334,8 @@
     <MESSAGE value="主分支第三次提交，修改了5个文件。" />
     <MESSAGE value="主分支第四次提交，把readme.md文件移到最外层。" />
     <MESSAGE value="主分支第五次提交，更新了六个文件，成功进行基于马尔可夫的DQN训练。" />
-    <option name="LAST_COMMIT_MESSAGE" value="主分支第五次提交，更新了六个文件，成功进行基于马尔可夫的DQN训练。" />
+    <MESSAGE value="主分支第六次提交，更新了五个文件。" />
+    <option name="LAST_COMMIT_MESSAGE" value="主分支第六次提交，更新了五个文件。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
