@@ -1,6 +1,6 @@
 # 本文件夹用于证明DQN算法在路由选择对于传统算法的优越性。
 ***
-## [data.py](data.py):
+## [data.py](模拟网络/data.py):
 >该文件拥有本网络拓扑仿真的数据包类，
 > 其含有的属性如下:
 >1. 数据包的大小。
@@ -16,7 +16,7 @@
 > 
 >实用的方法只有一个，也就是记录数据的方法。
 
-## [link.py](link.py):
+## [link.py](模拟网络/link.py):
 > 该文件表示本网络拓扑中的链路类，其中含有的的属性
 > 如下：
 >1. 一个传输队列。
@@ -30,7 +30,7 @@
 >2. 将数据发送至链路的传输队列中。
 >3. 数据从传输队列出队后，更新链路传输对列数据可用量。
 
-## [router.py](router.py):
+## [router.py](模拟网络/router.py):
 > 该文件表示本网络拓扑中的路由器类，其中含有的的属性
 > 如下：
 > 1. 路由器的序号
@@ -53,7 +53,7 @@
 > 5. 将数据发送至接受队列,传输失败返回False,传输成功返回True
 >(在这个网络拓扑中的所有丢包都发生在该方法中)
 
-## [net.py](net.py):
+## [net.py](模拟网络/net.py):
 > 该类是本网络拓扑中最核心的类，代表了网络本身，上接网络
 > 拓扑中三个基础元素类，即路由器，链路，数据包，下启
 > 三种算法的具体拓扑网络，即OSPF,RIP,DQN，是实际测试
@@ -78,7 +78,7 @@
 > 4. 发送数据包（核心方法，数据包从起始路由器发出到
 >目标路由器收到或被丢弃的整个生命周期都由这个方法负责）
 
-## [DQN.py](DQN.py)：
+## [DQN.py](模拟网络/DQN.py)：
 >该类含有实现DQN算法的类，该类含有以下属性（超参数）：
 > 1. 状态大小 state_size
 > 2. 行为大小 action_size
@@ -97,27 +97,27 @@
 > 4. 取小批量数据优化模型
 
 
-## [ospf_network.py](ospf_network.py):
+## [ospf_network.py](模拟网络/ospf_network.py):
 >该类含有基于OSPF的通信网络，这个类继承自net.py中的类，
 > 且无变化，因为net.py中的网络类就是基于OSPF设计的。
 
-## [rip_network.py](rip_network.py)：
+## [rip_network.py](模拟网络/rip_network.py)：
 >该类含有基于RIP的通信网络，这个类继承自net.py中的类，
 > 与父类唯一的不同即为每条链路的权值都为1，并且同步更新了
 > 路由表。
 
-## [dqn_network.py](dqn_network.py)：
+## [dqn_network.py](模拟网络/dqn_network.py)：
 >该类继承Net和DQN,继承了两个类的全部属性和方法，此外，
 > 它还拥有一个额外的方法，即通过K最短路径算法计算出K条
 > 最短路径，用于后期的DQN选路。
 
-## [Test_normal.py](Test_normal.py)：
+## [Test_normal.py](模拟网络/Test_normal.py)：
 > 该类是我对构建这个拓扑网络过程中进行的一系列常规测试，可忽略
 
-## [Test_official.py](Test_official.py)：
+## [Test_official.py](模拟网络/Test_official.py)：
 > 该类是我对这个拓扑网络的正式测试，其完整的实现了数据包在网络中分发的具体情况。
 
-## [dqn_test.py](dqn_test.py)：
+## [dqn_test.py](模拟网络/dqn_test.py)：
 > 该类是我对DQN模型进行训练并与常规算法进行对比测试的类，这个类成功地证明了DQN对于
 > 寻路算法的优势。
 
