@@ -125,7 +125,6 @@ class Net:
                 self.logs[data] = copy.deepcopy(data.logs)
                 self.logs[data].append(time.perf_counter() - start_time)  # 统计总共的消耗时间
                 self.logs[data].append(False)
-                data.logs.clear()
                 break
             time.sleep(len(data) // self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
             self.calculate_handling_capacity(data.shortest_path[sign + 1], self.router_power)  # 更新路由器的吞吐量(入下一个路由器)
@@ -139,4 +138,3 @@ class Net:
             self.logs[data] = copy.deepcopy(data.logs)
             self.logs[data].append(round(time.perf_counter() - start_time, 5))  # 统计总共的消耗时间,保留五位小数。
             self.logs[data].append(True)
-            data.logs.clear()

@@ -38,7 +38,7 @@ class Router:
     """将数据从接收队列发送到发送队列"""
     def from_receive_queue_send_queue(self, data):
         self.receive_occupation -= len(data)
-        self.send_queue.append(data)
+        # self.send_queue.append(data)
         self.send_occupation += len(data)
         data.state = self.send_sign
         if data.state[0] == data.get_start():
@@ -74,7 +74,7 @@ class Router:
             return True
         else:
             """否则入队"""
-            self.receive_queue.append(data)  # 添加数据
+            # self.receive_queue.append(data)  # 添加数据
             self.receive_occupation += len(data)  # 修改数据量
             data.state = self.receive_sign  # 修改状态
             return False

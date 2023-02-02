@@ -1,5 +1,6 @@
 import collections
 import random
+import time
 
 import networkx as nx
 import numpy
@@ -63,4 +64,11 @@ if __name__ == '__main__':
     print(dqn_net_agent.memory)
     dqn_net_agent.show_graph()
     print(k_shortest_paths(dqn_net_agent.G, 7, 9, 1))
+    count = 0
+    while True:
+        if count >= 30:
+            time.sleep(1)
+            break
+        count += 1
+    print(count)
 

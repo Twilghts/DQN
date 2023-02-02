@@ -14,6 +14,7 @@ if __name__ == '__main__':
         """准备进行网络拓扑中信息的传输!"""
         thread_pool = []  # 线程池
         dqn_net_agent.time = time.perf_counter()  # 更新网络开始时的时间戳，为计算吞吐量做准备
+        print(len(dqn_net_agent.data_set))
         """正式启动信息发送"""
         for data in dqn_net_agent.data_set:
             task_thread = threading.Thread(target=dqn_net_agent.send_message, args=[data, True])  # 为每一个发送信息的过程创建线程

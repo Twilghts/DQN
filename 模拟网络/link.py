@@ -26,7 +26,7 @@ class Link:
 
     """将数据发送至链路的传输队列中"""
     def put_data(self, data, state):
-        self.link_deque.append(data)
+        # self.link_deque.append(data)
         self.occupation += len(data)
         data.state = state
 

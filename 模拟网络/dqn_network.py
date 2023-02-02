@@ -18,6 +18,7 @@ class DqnNetworkAgent(Net, DQN):
     def send_message(self, data, is_dqn=True, path=None):
         path = []
         _start_time = time.perf_counter()
+        count = 0  # 传输信息的次数,如果传三十次都传不好，就快速失败。
         """将信息放到第一个路由器的接收队列"""
         while True:
             if len(data) <= self.routers[data.get_start()].get_receive_size():
@@ -28,8 +29,8 @@ class DqnNetworkAgent(Net, DQN):
             else:
                 time.sleep(self.waiting_time)  # 轮询等待时间
         path.append(data.get_start())
-        state = data.get_start()
-        action = self.act(data.get_start(), self.G)
+        state = data.get_start()  # 起始状态（起始路由器）
+        action = self.act(data.get_start(), self.G)  # 第一个动作
         while True:
             """当信息不在发送队列时一直轮询"""
             while True:
@@ -55,13 +56,16 @@ class DqnNetworkAgent(Net, DQN):
             """此时信息已从链路上传递完成"""
             self.links[link_message].pop_data(data)  # 信息从链路中出队，不再等待
             is_loss_package = self.routers[action].put_receive_queue(data)  # 信息从下一个接收队列入队，有丢包风险
-            if is_loss_package:
-                """当数据包未能成功传输时所作的记录"""
+            if is_loss_package or count >= 30:
+                """当数据包未能成功传输或者传输次数过大时时所作的记录"""
+                """如果信息传输成功而传输次数过大时，进行特殊处理"""
+                if count >= 30 and not is_loss_package:
+                    self.routers[action].from_receive_queue_send_queue(data)
+                    self.routers[action].pop_send_queue(data)  # 信息从从最后一个路由器的发送队列出队
                 self.logs[data] = copy.deepcopy(data.logs)
-                self.logs[data].append(time.perf_counter() - _start_time)  # 统计总共的消耗时间
+                self.logs[data].append(round(time.perf_counter() - _start_time, 5))  # 统计总共的消耗时间
                 self.logs[data].append(False)
                 print(f'一个数据包的传输记录{data.logs}')
-                data.logs.clear()
                 break
             time.sleep(len(data) // self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
             self.calculate_handling_capacity(action, self.router_power)  # 更新路由器的吞吐量(入下一个路由器)
@@ -76,11 +80,13 @@ class DqnNetworkAgent(Net, DQN):
                 self.logs[data].append(round(time.perf_counter() - _start_time, 5))  # 统计总共的消耗时间,保留五位小数。
                 self.logs[data].append(True)
                 print(f'一个数据包的传输记录{data.logs}')
-                data.logs.clear()
                 break
             else:
                 state = action
                 action = self.act(state, self.G)
+                count += 1
+            if time.perf_counter() - _start_time > 10:
+                time.sleep(1)
 
 
 if __name__ == '__main__':
