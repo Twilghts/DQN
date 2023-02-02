@@ -34,8 +34,8 @@ class Net:
             self.G.edges(data=True)
         }
         """数据包集合，一共有指定数目个数据包,每个数据包的大小都不同。"""
-        self.size_min = 0  # 数据包大小的最小值
-        self.size_max = 100  # 数据包大小的最大值
+        self.size_min = 400  # 数据包大小的最小值
+        self.size_max = 600  # 数据包大小的最大值
         self.data_set = {Data(x, y, size=random.randint(self.size_min, self.size_max), is_privacy=False) for x, y in
                          zip(numpy.random.choice(self.G.nodes, self.data_size),
                              numpy.random.choice(self.G.nodes, self.data_size)) if x != y}
@@ -125,16 +125,18 @@ class Net:
                 self.logs[data] = copy.deepcopy(data.logs)
                 self.logs[data].append(time.perf_counter() - start_time)  # 统计总共的消耗时间
                 self.logs[data].append(False)
+                data.logs.clear()
                 break
             time.sleep(len(data) // self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
             self.calculate_handling_capacity(data.shortest_path[sign + 1], self.router_power)  # 更新路由器的吞吐量(入下一个路由器)
         """当数据包进入目标路由器时，与进入起始路由器时同样进行特殊处理"""
         if data.state == (0, data.get_goal()):
             """信息从最后一个路由器的接收队列进入最后一个路由器的发送队列"""
-            self.routers[data.shortest_path[-1]].from_receive_queue_send_queue(data)
-            self.routers[data.shortest_path[-1]].pop_send_queue(data)  # 信息从从最后一个路由器的发送队列出队
-            self.calculate_handling_capacity(data.shortest_path[-1], -self.router_power)  # 更新路由器的吞吐量(出最后一个路由器)
+            self.routers[data.get_goal()].from_receive_queue_send_queue(data)
+            self.routers[data.get_goal()].pop_send_queue(data)  # 信息从从最后一个路由器的发送队列出队
+            self.calculate_handling_capacity(data.get_goal(), -self.router_power)  # 更新路由器的吞吐量(出最后一个路由器)
             """当数据包成功传输时所作的记录"""
             self.logs[data] = copy.deepcopy(data.logs)
             self.logs[data].append(round(time.perf_counter() - start_time, 5))  # 统计总共的消耗时间,保留五位小数。
             self.logs[data].append(True)
+            data.logs.clear()

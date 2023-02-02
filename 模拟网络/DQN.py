@@ -14,7 +14,7 @@ class DQN:
         self.epsilon = 1.0  # 随机探索率
         self.epsilon_min = 0.01  # 最低随机探索率
         self.epsilon_decay = 0.95  # 探索率下降指数
-        self.learning_rate = 0.001  # 学习率
+        self.learning_rate = 0.01  # 学习率
         self.model = self._build_model()  # 建造模型
 
     def _build_model(self):

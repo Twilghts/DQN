@@ -8,7 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0641f1d-d74d-4c69-970c-f95a31e78ee7" name="变更" comment="初始化 74个文件。" />
+    <list default="true" id="f0641f1d-d74d-4c69-970c-f95a31e78ee7" name="变更" comment="初始化 74个文件。">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/模拟网络/DQN.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/DQN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/模拟网络/dqn_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/dqn_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/模拟网络/dqn_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/dqn_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/模拟网络/net.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/net.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,24 +50,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/迅雷下载/联邦学习/DQN&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/迅雷下载/联邦学习/DQN",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "inlay.hints",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings>
@@ -81,7 +86,7 @@
       <recent name="C:\迅雷下载\联邦学习\DQN\data" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Test_normal (1)">
+  <component name="RunManager" selected="Python.dqn_test">
     <configuration name="Test_normal (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DQN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -120,29 +125,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="C:\迅雷下载\联邦学习\DQN\模拟网络\Test_normal.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="true" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_official" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="DQN" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Twilght\anaconda3\envs\DQN\python.exe" />
-      <option name="SDK_NAME" value="Python 3.9 (DQN)" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/模拟网络" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\迅雷下载\联邦学习\DQN\模拟网络\Test_official.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="true" />
@@ -221,7 +203,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.Test_official" />
       <item itemvalue="Python.dqn_test" />
       <item itemvalue="Python.Test_normal" />
       <item itemvalue="Python.Test_normal (1)" />
@@ -229,9 +210,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Test_normal (1)" />
         <item itemvalue="Python.dqn_test" />
-        <item itemvalue="Python.Test_official" />
+        <item itemvalue="Python.Test_normal (1)" />
         <item itemvalue="Python.Test_normal" />
         <item itemvalue="Python.rip_network" />
       </list>
@@ -280,7 +260,9 @@
       <workItem from="1675165490812" duration="1906000" />
       <workItem from="1675231782088" duration="18959000" />
       <workItem from="1675263939519" duration="494000" />
-      <workItem from="1675280114247" duration="1078000" />
+      <workItem from="1675280114247" duration="1280000" />
+      <workItem from="1675281561483" duration="2110000" />
+      <workItem from="1675317500499" duration="4935000" />
     </task>
     <task id="LOCAL-00001" summary="初始化 74个文件。">
       <created>1675264049408</created>
@@ -306,7 +288,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="optimize_train" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -353,7 +335,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DQN$rip_network.coverage" NAME="rip_network 覆盖结果" MODIFIED="1674140591448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
     <SUITE FILE_PATH="coverage/DQN$Test_DQN_6.coverage" NAME="Test-DQN-6 覆盖结果" MODIFIED="1673616528078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$dqn_test.coverage" NAME="dqn_test 覆盖结果" MODIFIED="1675246867904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$dqn_test.coverage" NAME="dqn_test 覆盖结果" MODIFIED="1675322441998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
     <SUITE FILE_PATH="coverage/DQN$Test_normal__1_.coverage" NAME="Test_normal (1) 覆盖结果" MODIFIED="1675257477771" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
     <SUITE FILE_PATH="coverage/DQN$Test.coverage" NAME="Test 覆盖结果" MODIFIED="1674308676293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
     <SUITE FILE_PATH="coverage/DQN$Test_all.coverage" NAME="Test-all 覆盖结果" MODIFIED="1674019689836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />

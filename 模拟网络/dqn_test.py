@@ -16,7 +16,7 @@ if __name__ == '__main__':
         dqn_net_agent.time = time.perf_counter()  # 更新网络开始时的时间戳，为计算吞吐量做准备
         """正式启动信息发送"""
         for data in dqn_net_agent.data_set:
-            task_thread = threading.Thread(target=dqn_net_agent.send_message, args=[data, False])  # 为每一个发送信息的过程创建线程
+            task_thread = threading.Thread(target=dqn_net_agent.send_message, args=[data, True])  # 为每一个发送信息的过程创建线程
             # print(f'线程{task_thread.name}开启!')
             task_thread.start()  # 启动线程
             thread_pool.append(task_thread)  # 将线程添加到线程池
@@ -47,7 +47,7 @@ if __name__ == '__main__':
         average_loss.append(round(failure / gross * 100, 3))
         dqn_net_agent.logs.clear()  # 每一轮发送信息之后清空记录。
         """每一次发送信息之后训练数据。"""
-        dqn_net_agent.replay(48, dqn_net_agent.G)
+        dqn_net_agent.replay(64, dqn_net_agent.G)
         """更新数据包集合，并随机修改数据包大小."""
         dqn_net_agent.update_dataset(False)
 
