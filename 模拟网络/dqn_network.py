@@ -1,9 +1,9 @@
 import copy
 import time
 
+from net import Net
 from 模拟网络.DQN import DQN
 from 模拟网络.利用network实现k最短路径算法 import k_shortest_paths
-from net import Net
 
 
 class DqnNetworkAgent(Net, DQN):
@@ -24,7 +24,7 @@ class DqnNetworkAgent(Net, DQN):
             if len(data) <= self.routers[data.get_start()].get_receive_size():
                 self.routers[data.get_start()].put_receive_queue(data)  # 信息进入等待队列
                 self.calculate_handling_capacity(data.get_start(), self.router_power)  # 更新路由器的吞吐量(入第一个路由器)
-                time.sleep(len(data) // self.router_power)  # 信息在路由器接收队列的处理时间
+                time.sleep(len(data) / self.router_power)  # 信息在路由器接收队列的处理时间
                 break
             else:
                 time.sleep(self.waiting_time)  # 轮询等待时间
@@ -36,7 +36,7 @@ class DqnNetworkAgent(Net, DQN):
             while True:
                 if len(data) <= self.routers[state].get_send_size():
                     self.routers[state].from_receive_queue_send_queue(data)  # 信息从接收队列移至发送队列,进行常规记录。
-                    time.sleep(len(data) // self.router_power)  # 信息在路由器发送队列的处理时间
+                    time.sleep(len(data) / self.router_power)  # 信息在路由器发送队列的处理时间
                     break
                 else:
                     time.sleep(self.waiting_time)  # 轮询等待时间
@@ -67,7 +67,7 @@ class DqnNetworkAgent(Net, DQN):
                 self.logs[data].append(False)
                 print(f'一个数据包的传输记录{data.logs}')
                 break
-            time.sleep(len(data) // self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
+            time.sleep(len(data) / self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
             self.calculate_handling_capacity(action, self.router_power)  # 更新路由器的吞吐量(入下一个路由器)
             """当数据包进入目标路由器时，与进入起始路由器时同样进行特殊处理，此时数据包成功传输到目标"""
             if data.state == (0, data.get_goal()):
@@ -85,8 +85,6 @@ class DqnNetworkAgent(Net, DQN):
                 state = action
                 action = self.act(state, self.G)
                 count += 1
-            if time.perf_counter() - _start_time > 10:
-                time.sleep(1)
 
 
 if __name__ == '__main__':

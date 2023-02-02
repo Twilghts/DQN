@@ -8,14 +8,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0641f1d-d74d-4c69-970c-f95a31e78ee7" name="变更" comment="主分支第四次提交，把readme.md文件移到最外层。">
+    <list default="true" id="f0641f1d-d74d-4c69-970c-f95a31e78ee7" name="变更" comment="主分支第五次提交，更新了六个文件，成功进行基于马尔可夫的DQN训练。">
+      <change afterPath="$PROJECT_DIR$/模拟网络/model_1.h5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/模拟网络/Test_normal.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/Test_normal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/模拟网络/dqn_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/dqn_network.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/模拟网络/dqn_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/dqn_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/模拟网络/link.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/link.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/模拟网络/net.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/net.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/模拟网络/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/router.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +263,7 @@
       <workItem from="1675280114247" duration="1280000" />
       <workItem from="1675281561483" duration="2110000" />
       <workItem from="1675317500499" duration="6264000" />
-      <workItem from="1675323830804" duration="3380000" />
+      <workItem from="1675323830804" duration="6889000" />
     </task>
     <task id="LOCAL-00001" summary="初始化 74个文件。">
       <created>1675264049408</created>
@@ -288,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675322724642</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="主分支第五次提交，更新了六个文件，成功进行基于马尔可夫的DQN训练。">
+      <created>1675327340456</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1675327340456</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +326,8 @@
     <MESSAGE value="初始化 74个文件。" />
     <MESSAGE value="主分支第三次提交，修改了5个文件。" />
     <MESSAGE value="主分支第四次提交，把readme.md文件移到最外层。" />
-    <option name="LAST_COMMIT_MESSAGE" value="主分支第四次提交，把readme.md文件移到最外层。" />
+    <MESSAGE value="主分支第五次提交，更新了六个文件，成功进行基于马尔可夫的DQN训练。" />
+    <option name="LAST_COMMIT_MESSAGE" value="主分支第五次提交，更新了六个文件，成功进行基于马尔可夫的DQN训练。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -341,6 +347,11 @@
           <line>69</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/模拟网络/data.py</url>
+          <line>50</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -359,7 +370,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DQN$rip_network.coverage" NAME="rip_network 覆盖结果" MODIFIED="1674140591448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
     <SUITE FILE_PATH="coverage/DQN$Test_DQN_6.coverage" NAME="Test-DQN-6 覆盖结果" MODIFIED="1673616528078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$dqn_test.coverage" NAME="dqn_test 覆盖结果" MODIFIED="1675326963670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$dqn_test.coverage" NAME="dqn_test 覆盖结果" MODIFIED="1675330464915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
     <SUITE FILE_PATH="coverage/DQN$Test_normal__1_.coverage" NAME="Test_normal (1) 覆盖结果" MODIFIED="1675324456453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
     <SUITE FILE_PATH="coverage/DQN$Test.coverage" NAME="Test 覆盖结果" MODIFIED="1674308676293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
     <SUITE FILE_PATH="coverage/DQN$Test_all.coverage" NAME="Test-all 覆盖结果" MODIFIED="1674019689836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
