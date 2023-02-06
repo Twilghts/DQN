@@ -12,7 +12,7 @@ class DQN:
         self.memory = deque(maxlen=2000)
         self.gamma = 0.95  # 折扣率
         self.epsilon = 1.0  # 随机探索率
-        self.epsilon_min = 0.01  # 最低随机探索率
+        self.epsilon_min = 0.001  # 最低随机探索率
         self.epsilon_decay = 0.95  # 探索率下降指数
         self.learning_rate = 0.01  # 学习率
         self.model = self._build_model()  # 建造模型
@@ -30,15 +30,23 @@ class DQN:
         #  储存回放缓存
         self.memory.append((_state, _action, reward, _next_state, done))
 
-    def act(self, _state, graph):
+    def choose_path(self, paths):
         #  进行探索
         #  随机探索
         if np.random.rand() <= self.epsilon:
-            return random.choice([_action for _action in graph.neighbors(_state)])  # 返回随机动作
+            return random.choice([path for path in paths])  # 返回随机路径
         #  根据模型取最优行为
-        act_values = self.model(np.array([_state])).numpy()
-        return max([_action for _action in graph.neighbors(_state)],
-                   key=lambda x: act_values[0][x])  # 以最小估计距离返回动作
+        values = {}  # 该字典的键为每条路径的预期奖励值，值为该奖励值所对应的路径
+        for _path in paths:
+            """为每条路径算出预期奖励值"""
+            value = 0
+            for i in range(len(_path) - 1):
+                value += self.model(np.array([_path[i]])).numpy()[0][_path[i + 1]]
+            values[value] = _path
+        """通过每条路径奖励值的大小选择最佳路径"""
+        path = max([_item for _item in values.items()],
+                   key=lambda x: x[0])[1]
+        return path
 
     def replay(self, batch_size, graph):
         #  取小批量数据优化模型

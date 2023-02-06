@@ -79,14 +79,14 @@ def train_dqn(env, model, num_episodes):
         state = env.reset()
         total_reward = 0
         for i in range(100):
-            action = model.act(state)
+            action = model.choose_path(state)
             next_state, reward, done, *_ = env.step(action)
             replay_buffer.append((state, action, reward, next_state, done))
 
         while True:
             # Select an action using the DQN model
             # action = model(torch.tensor(state, dtype=torch.float)).argmax().path()
-            action = model.act(state)
+            action = model.choose_path(state)
 
             # Take a step in the environment
             next_state, reward, done, *_ = env.step(action)

@@ -71,4 +71,6 @@ if __name__ == '__main__':
             break
         count += 1
     print(count)
-
+    list_5 = [i for i in range(10)]
+    print(list_5)
+    print(list_5[:-2])

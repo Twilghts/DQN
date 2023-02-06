@@ -36,6 +36,7 @@ class Net:
         """数据包集合，一共有指定数目个数据包,每个数据包的大小都不同。"""
         self.size_min = 500  # 数据包大小的最小值
         self.size_max = 600  # 数据包大小的最大值
+        """本数据集合用于充当背景环境。"""
         self.data_set = {Data(x, y, size=random.randint(self.size_min, self.size_max), is_privacy=False) for x, y in
                          zip(numpy.random.choice(self.G.nodes, self.data_size),
                              numpy.random.choice(self.G.nodes, self.data_size)) if x != y}
@@ -48,7 +49,7 @@ class Net:
         self.waiting_time = 0.05  # 询问等待时间
 
     def update_dataset(self, is_privacy):
-        """更新数据包内容。
+        """更新数据包内容。一部分是用于dqn训练，另一部分当作背景环境。
         :param is_privacy:
         """
         self.data_set = {Data(x, y, size=random.randint(self.size_min, self.size_max), is_privacy=is_privacy) for x, y

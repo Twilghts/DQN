@@ -55,7 +55,7 @@ class Agent(BaseModel):
             # 1. predict
             action = self.predict(self.history.get())
             # 2. act
-            screen, reward, terminal = self.env.act(action, is_training=True)
+            screen, reward, terminal = self.env.choose_path(action)
             # 3. observe
             self.observe(screen, reward, action, terminal)
 
@@ -401,7 +401,7 @@ class Agent(BaseModel):
                 # 1. predict
                 action = self.predict(test_history.get(), test_ep)
                 # 2. act
-                screen, reward, terminal = self.env.act(action, is_training=False)
+                screen, reward, terminal = self.env.choose_path(action)
                 # 3. observe
                 test_history.add(screen)
 

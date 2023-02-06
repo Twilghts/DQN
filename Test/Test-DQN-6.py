@@ -61,7 +61,7 @@ def visualize_path(agent, grid, start, goal):
     path = [start]
     current_state = start
     while any(current_state) != any(goal):
-        action = agent.act(np.array([current_state]))
+        action = agent.choose_path(np.array([current_state]))
         next_state = current_state + np.array(ACTIONS)[action]
         path.append(next_state)
         current_state = next_state
