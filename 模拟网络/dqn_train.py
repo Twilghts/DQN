@@ -7,12 +7,12 @@ import tensorflow as tf
 from dqn_network import DqnNetworkAgent
 
 _batch_size = 64  # 每次训练的数据组的数量。
-_interval_time = 0.05  # 数据包发送的间隔时间。
+_interval_time = 0.01  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
     dqn_net_agent = DqnNetworkAgent()
     average_loss = []  # 计算平均丢包率。
-    model = tf.keras.models.load_model('model_4.h5')  # 加载模型
+    model = tf.keras.models.load_model('model_3.h5')  # 加载模型
     dqn_net_agent.model = model
     """训练模型的全过程。"""
     # for i in range(1000):
@@ -110,9 +110,10 @@ if __name__ == '__main__':
         dqn_net_agent.update_dataset(True)
 
     print(
-        f'这次数据包的大小:{dqn_net_agent.data_size}。使用DQN算法的平均丢包率:{np.mean(average_loss)}%')
-    print(f'这次数据包的大小:{dqn_net_agent.data_size}。使用DQN算法的丢包率的集合:{average_loss}')
+        f'这次数据包的大小:{dqn_net_agent.data_size},数据包个数{dqn_net_agent.data_number}。使用DQN算法的平均丢包率:{np.mean(average_loss)}%')
+    print(f'这次数据包的大小:{dqn_net_agent.data_size},数据包个数{dqn_net_agent.data_number}。使用DQN算法的丢包率的集合:{average_loss}')
     for item in random.sample(list(dqn_net_agent.logs.items()), 1):
         print(f'数据包:{item[0]}的记录为{item[1]}')
-    for router in random.sample(list(dqn_net_agent.routers.values()), 1):
-        print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
+    # for router in random.sample(list(dqn_net_agent.routers.values()), 1):
+    #     print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
+    print(f'路由器:{3}的吞吐量为:{dqn_net_agent.routers[3].handling_capacity}')

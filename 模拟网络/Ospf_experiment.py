@@ -6,7 +6,7 @@ import numpy as np
 
 from ospf_network import Ospf
 
-_interval_time = 0.05  # 数据包发送的间隔时间。
+_interval_time = 0.01  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
     ospf_net_ = Ospf()
@@ -56,10 +56,11 @@ if __name__ == '__main__':
         ospf_net_.update_dataset(False)
 
     print(
-        f'这次数据包的大小:{ospf_net_.data_size}。传统算法丢包率的集合:{average_loss}')
+        f'这次数据包的大小:{ospf_net_.data_size},数据包个数{ospf_net_.data_number}。Ospf算法丢包率的集合:{average_loss}')
     print(
-        f'这次数据包的大小:{ospf_net_.data_size}。使用传统算法的平均丢包率:{np.mean(average_loss)}%')
+        f'这次数据包的大小:{ospf_net_.data_size},数据包个数{ospf_net_.data_number}。Ospf算法的平均丢包率:{np.mean(average_loss)}%')
     for item in random.sample(list(ospf_net_.logs.items()), 1):
         print(f'数据包:{item[0]}的记录为{item[1]}')
-    for router in random.sample(list(ospf_net_.routers.values()), 1):
-        print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
+    # for router in random.sample(list(ospf_net_.routers.values()), 1):
+    #     print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
+    print(f'路由器:{3}的吞吐量为:{ospf_net_.routers[3].handling_capacity}')

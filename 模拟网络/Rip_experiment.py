@@ -6,7 +6,7 @@ import numpy as np
 
 from rip_network import Rip
 
-_interval_time = 0.05  # 数据包发送的间隔时间。
+_interval_time = 0.01  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
     rip_net = Rip()
@@ -36,7 +36,6 @@ if __name__ == '__main__':
                 """如果线程结束，从线程池中移除该线程，并打印出相关性息!"""
                 if not thread.is_alive():
                     thread_pool.remove(thread)
-                    # print(f'线程{thread.name}结束运行')
             """如果线程池被清空，则继续运行!"""
             if len(thread_pool) == 0:
                 break
@@ -49,15 +48,14 @@ if __name__ == '__main__':
                 failure += 1
         print(f'丢包率:{round(failure / gross * 100, 3)}%')  # 保留三位小数
         average_loss.append(round(failure / gross * 100, 3))
-        """每一次发送信息之后训练数据。"""
         """更新数据包集合，并随机修改数据包大小."""
         rip_net.update_dataset(False)
 
     print(
-        f'这次数据包的大小:{rip_net.data_size}。传统算法丢包率的集合:{average_loss}')
+        f'这次数据包的大小:{rip_net.data_size},数据包个数{rip_net.data_number}。Rip算法丢包率的集合:{average_loss}')
     print(
-        f'这次数据包的大小:{rip_net.data_size}。使用传统算法的平均丢包率:{np.mean(average_loss)}%')
+        f'这次数据包的大小:{rip_net.data_size},数据包个数{rip_net.data_number}。Rip算法的平均丢包率:{np.mean(average_loss)}%')
     for item in random.sample(list(rip_net.logs.items()), 1):
         print(f'数据包:{item[0]}的记录为{item[1]}')
-    for router in random.sample(list(rip_net.routers.values()), 1):
-        print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
+    # for router in random.sample(list(rip_net.routers.values()), 1):
+    print(f'路由器:{3}的吞吐量为:{rip_net.routers[3].handling_capacity}')

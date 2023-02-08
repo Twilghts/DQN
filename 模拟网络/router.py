@@ -6,7 +6,7 @@ _ip = ['10.0.0.' + str(n) for n in range(100)]
 
 
 class Router:
-    def __init__(self, number: int, speed=0.1, datasize=1000):
+    def __init__(self, number: int, speed=0.1, datasize=100):
         self.sign = number  # 路由器的序号
         self._ip = _ip[number]  # ip地址
         self.datasize = datasize  # 队列的最大数据接收量

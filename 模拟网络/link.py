@@ -2,7 +2,7 @@ import collections
 
 
 class Link:
-    def __init__(self, ports: tuple, length=10 ** 5, datasize=1000, delay=0.5):
+    def __init__(self, ports: tuple, length=10 ** 5, datasize=100, delay=0.5):
         self.link_deque = collections.deque(maxlen=datasize)  # 信道长度，设置最大传输数据量
         self.length = length  # 链路长度
         self.ports: tuple = ports  # 链路两端连接的路由器序号
