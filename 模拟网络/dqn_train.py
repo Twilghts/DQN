@@ -11,7 +11,7 @@ _interval_time = 0.05  # 数据包发送的间隔时间。
 if __name__ == '__main__':
     dqn_net_agent = DqnNetworkAgent()
     average_loss = []  # 计算平均丢包率。
-    model = tf.keras.models.load_model('model_3.h5')  # 加载模型
+    model = tf.keras.models.load_model('model_4.h5')  # 加载模型
     dqn_net_agent.model = model
     """训练模型的全过程。"""
     # for i in range(1000):

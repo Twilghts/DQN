@@ -36,11 +36,14 @@ class Net:
         """数据包集合，一共有指定数目个数据包,每个数据包的大小都不同。"""
         self.size_min = 600  # 数据包大小的最小值
         self.size_max = 700  # 数据包大小的最大值
-        self.data_size = 700  # 数据包的大小
+        self.data_size = 200  # 数据包的大小
         """本数据集合用于充当背景环境。"""
         self.data_set = {Data(x, y, size=self.data_size, is_privacy=False) for x, y in
                          zip(numpy.random.choice(self.G.nodes, self.data_number),
                              numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
+        while len(self.data_set) < 40:
+            pair = random.sample(self.G.nodes, 2)
+            self.data_set.add(Data(pair[0], pair[1], size=self.data_size, is_privacy=False))
         """信息流的记录信息,键为数据包本体，值为数据包在网络中传输的记录"""
         self.logs = {
             data: [] for data in self.data_set
@@ -57,6 +60,9 @@ class Net:
                          in
                          zip(numpy.random.choice(self.G.nodes, self.data_number),
                              numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
+        while len(self.data_set) < 40:
+            pair = random.sample(self.G.nodes, 2)
+            self.data_set.add(Data(pair[0], pair[1], size=self.data_size, is_privacy=is_privacy))
 
     def show_graph(self):
         # 使用spring布局绘制图形

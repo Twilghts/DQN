@@ -6,8 +6,8 @@ import networkx as nx
 import numpy
 
 from data import Data
-from net import Net
 from dqn_network import DqnNetworkAgent
+from net import Net
 from 利用network实现k最短路径算法 import k_shortest_paths
 
 n = 50  # 点的数量
@@ -20,7 +20,8 @@ G = nx.gnm_random_graph(n, m)
 for u, v, d in G.edges(data=True):
     d['weight'] = random.randint(1, 100)
 
-data_set = {Data(x, y, False) for x, y in zip(numpy.random.choice(G.nodes, 100), numpy.random.choice(G.nodes, 100)) if x == y}
+data_set = {Data(x, y, False) for x, y in zip(numpy.random.choice(G.nodes, 100), numpy.random.choice(G.nodes, 100)) if
+            x == y}
 print(data_set)
 print(f'图的点为{G.nodes}')
 print(f'图的点为{numpy.random.choice(G.nodes)}')
@@ -48,9 +49,9 @@ if __name__ == '__main__':
     deque_1 = collections.deque(maxlen=1000)
     list_1 = [i for i in range(10)]
     set_1 = set(list_1)
-    # print(list_1[-1])
-    # for i in set_1:
-    #     print(i)
+    print(list_1[-1])
+    for i in set_1:
+        print(i)
     list_2 = [[i for i in range(10)], 2]
     list_3 = [[i for i in range(10, 20)], 3]
     list_4 = []
@@ -74,3 +75,7 @@ if __name__ == '__main__':
     list_5 = [i for i in range(10)]
     print(list_5)
     print(list_5[:-2])
+    while len(test_net.data_set) < 40:
+        pair = random.sample(test_net.G.nodes, 2)
+        print(pair)
+        # test_net.data_set.add()
