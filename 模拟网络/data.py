@@ -43,7 +43,7 @@ class Data:
     """记录数据，是DQN训练的重要保障"""
     def loging(self):
         self.log.append(self.state[0])  # 为记录增添目标路由器(action)
-        self.log.append(-round(time.perf_counter() - self.log_delay, 5))  # 为记录增添时间记录(reword),保留五位小数。
+        self.log.append(-round(time.perf_counter() - self.log_delay, 4))  # 为记录增添时间记录(reword),保留五位小数。
         self.log.append(self.state[0])  # 为记录增添目标路由器(next_state)
         self.log.append(self.state[0] == self._target)
         # if len(self.log) != 5:

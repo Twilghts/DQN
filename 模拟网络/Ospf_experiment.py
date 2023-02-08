@@ -1,3 +1,4 @@
+import random
 import threading
 import time
 
@@ -14,6 +15,10 @@ if __name__ == '__main__':
     # ospf_net_.model = model
     """训练模型的全过程。"""
     for i in range(25):
+        """每传输一次数据，就把路由器的吞吐量记录清零"""
+        for router in ospf_net_.routers.values():
+            router.handling_capacity.clear()
+        ospf_net_.logs.clear()  # 每一轮发送信息之后清空记录。
         print(f'第{i + 1}次记录数据!')
         """准备进行网络拓扑中信息的传输!"""
         thread_pool = []  # 线程池
@@ -46,7 +51,6 @@ if __name__ == '__main__':
                 failure += 1
         print(f'丢包率:{round(failure / gross * 100, 3)}%')  # 保留三位小数
         average_loss.append(round(failure / gross * 100, 3))
-        ospf_net_.logs.clear()  # 每一轮发送信息之后清空记录。
         """每一次发送信息之后训练数据。"""
         """更新数据包集合，并随机修改数据包大小."""
         ospf_net_.update_dataset(False)
@@ -55,4 +59,7 @@ if __name__ == '__main__':
         f'这次数据包的大小:{ospf_net_.data_size}。传统算法丢包率的集合:{average_loss}')
     print(
         f'这次数据包的大小:{ospf_net_.data_size}。使用传统算法的平均丢包率:{np.mean(average_loss)}%')
-    average_loss.clear()  # 接下来求使用DQN算法求出来的平均丢包率。
+    for item in random.sample(list(ospf_net_.logs.items()), 1):
+        print(f'数据包:{item[0]}的记录为{item[1]}')
+    for router in random.sample(list(ospf_net_.routers.values()), 1):
+        print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')

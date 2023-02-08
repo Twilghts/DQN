@@ -36,18 +36,21 @@ class Net:
         """数据包集合，一共有指定数目个数据包,每个数据包的大小都不同。"""
         self.size_min = 600  # 数据包大小的最小值
         self.size_max = 700  # 数据包大小的最大值
-        self.data_size = 700  # 数据包的大小
+        self.data_size = 200  # 数据包的大小
         """本数据集合用于充当背景环境。"""
         self.data_set = {Data(x, y, size=self.data_size, is_privacy=False) for x, y in
                          zip(numpy.random.choice(self.G.nodes, self.data_number),
                              numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
+        while len(self.data_set) < 40:
+            pair = random.sample(self.G.nodes, 2)
+            self.data_set.add(Data(pair[0], pair[1], size=self.data_size, is_privacy=False))
         """信息流的记录信息,键为数据包本体，值为数据包在网络中传输的记录"""
         self.logs = {
             data: [] for data in self.data_set
         }
         self.time = 0  # 网络开始传输信息时的时间戳，用于计算吞吐量
         self.router_power = 30000  # 路由器信息处理能力
-        self.waiting_time = 0.05  # 询问等待时间
+        self.waiting_time = 0.02  # 询问等待时间
 
     def update_dataset(self, is_privacy):
         """更新数据包内容。一部分是用于dqn训练，另一部分当作背景环境。
@@ -57,6 +60,9 @@ class Net:
                          in
                          zip(numpy.random.choice(self.G.nodes, self.data_number),
                              numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
+        while len(self.data_set) < 40:
+            pair = random.sample(self.G.nodes, 2)
+            self.data_set.add(Data(pair[0], pair[1], size=self.data_size, is_privacy=is_privacy))
 
     def show_graph(self):
         # 使用spring布局绘制图形
@@ -72,12 +78,13 @@ class Net:
 
     def calculate_handling_capacity(self, router_sign, handling_capacity):
         if len(self.routers[router_sign].handling_capacity) == 0:
-            self.routers[router_sign].handling_capacity.append((time.perf_counter() - self.time, handling_capacity))
+            self.routers[router_sign].handling_capacity.append(
+                (round(time.perf_counter() - self.time, 4), handling_capacity))
         else:
             """基础数值等于路由器最后状态([-1])的吞吐量([1])"""
             base_value = self.routers[router_sign].handling_capacity[-1][1]
             new_value = base_value + handling_capacity
-            self.routers[router_sign].handling_capacity.append((time.perf_counter() - self.time, new_value))
+            self.routers[router_sign].handling_capacity.append((round(time.perf_counter() - self.time, 4), new_value))
 
     def send_message(self, data, is_dqn, path=None):
         """获取从数据包出发点到达结束点的最短路径"""
@@ -138,5 +145,5 @@ class Net:
             self.calculate_handling_capacity(data.get_goal(), -self.router_power)  # 更新路由器的吞吐量(出最后一个路由器)
             """当数据包成功传输时所作的记录"""
             self.logs[data] = copy.deepcopy(data.logs)
-            self.logs[data].append(round(time.perf_counter() - start_time, 5))  # 统计总共的消耗时间,保留五位小数。
+            self.logs[data].append(round(time.perf_counter() - start_time, 4))  # 统计总共的消耗时间,保留五位小数。
             self.logs[data].append(True)

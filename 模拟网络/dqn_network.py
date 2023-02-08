@@ -1,4 +1,3 @@
-import copy
 import time
 
 from net import Net
@@ -17,7 +16,7 @@ class DqnNetworkAgent(Net, DQN):
 
     def send_message(self, data, is_dqn=True, path=None):
         """如果是用于当作背景的数据传输，就调用父类的方法。"""
-        super().send_message(data, is_dqn, path)
+        super().send_message(data, True, path)
         # path = []
         # _start_time = time.perf_counter()
         # count = 0  # 传输信息的次数,如果传三十次都传不好，就快速失败。
@@ -88,14 +87,3 @@ class DqnNetworkAgent(Net, DQN):
         #         state = action
         #         action = self.choose_path(state)
         #         count += 1
-
-
-if __name__ == '__main__':
-    start_time = time.perf_counter()
-    dqn_net = DqnNetworkAgent()
-    # for router in dqn_net.routers:
-    #     print(f'路由器序号:{router.sign},对应的路由表:{router.routing_table}')
-    print(dqn_net.routers)
-    print(dqn_net.links)
-    print(dqn_net.data_set)
-    print('消耗时间:{time.perf_counter() - start_time}')

@@ -22,10 +22,10 @@ class Router:
         self.handling_capacity = []  # 用于计算吞吐量的列表，内部元素应该是一个个元组，每一个元组代表着路由器吞吐量的变化
 
     def __str__(self):
-        return f'Router:({self.sign},路由表为{self.routing_table})'
+        return f'Router:{self.sign}'
 
     def __repr__(self):
-        return f'Router:{self.sign},路由表为{self.routing_table})'
+        return f'Router:{self.sign}'
 
     """获取发送队列的可用数据量"""
     def get_send_size(self):
