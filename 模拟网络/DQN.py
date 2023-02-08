@@ -13,7 +13,7 @@ class DQN:
         self.gamma = 0.95  # 折扣率
         self.epsilon = 1.0  # 随机探索率
         self.epsilon_min = 0.001  # 最低随机探索率
-        self.epsilon_decay = 0.95  # 探索率下降指数
+        self.epsilon_decay = 0.995  # 探索率下降指数
         self.learning_rate = 0.01  # 学习率
         self.model = self._build_model()  # 建造模型
 
@@ -30,10 +30,10 @@ class DQN:
         #  储存回放缓存
         self.memory.append((_state, _action, reward, _next_state, done))
 
-    def choose_path(self, paths):
+    def choose_path(self, paths, is_best=False):
         #  进行探索
         #  随机探索
-        if np.random.rand() <= self.epsilon:
+        if np.random.rand() <= self.epsilon and not is_best:
             return random.choice([path for path in paths])  # 返回随机路径
         #  根据模型取最优行为
         values = {}  # 该字典的键为每条路径的预期奖励值，值为该奖励值所对应的路径

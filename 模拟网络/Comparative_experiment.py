@@ -5,6 +5,8 @@ import numpy as np
 
 from ospf_network import Ospf
 
+_interval_time = 0.05  # 数据包发送的间隔时间。
+
 if __name__ == '__main__':
     ospf_net_ = Ospf()
     average_loss = []  # 计算平均丢包率。
@@ -24,7 +26,7 @@ if __name__ == '__main__':
             # print(f'线程{task_thread.name}开启!')
             task_thread.start()  # 启动线程
             thread_pool.append(task_thread)  # 将线程添加到线程池
-            time.sleep(0.01)  # 每隔0.005秒发送一个数据包
+            time.sleep(_interval_time)  # 每隔_interval_time秒发送一个数据包
         """测试所有的线程是否存活，如果所有线程都结束运行，则主线程继续运行"""
         while True:
             for thread in thread_pool:
@@ -50,7 +52,7 @@ if __name__ == '__main__':
         ospf_net_.update_dataset(False)
 
     print(
-        f'这次数据包的起止大小:{(ospf_net_.size_min, ospf_net_.size_max)}。传统算法丢包率的集合:{average_loss}')
+        f'这次数据包的大小:{ospf_net_.data_size}。传统算法丢包率的集合:{average_loss}')
     print(
-        f'这次数据包的起止大小:{(ospf_net_.size_min, ospf_net_.size_max)}。使用传统算法的平均丢包率:{np.mean(average_loss)}%')
+        f'这次数据包的大小:{ospf_net_.data_size}。使用传统算法的平均丢包率:{np.mean(average_loss)}%')
     average_loss.clear()  # 接下来求使用DQN算法求出来的平均丢包率。

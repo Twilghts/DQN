@@ -57,7 +57,7 @@ class Router:
         if len(data) > self.get_receive_size():
             """如果数据包的大小大于路由器的接收队列，直接丢弃,并且进行记录"""
             data.log.append(self.receive_sign[1])
-            data.log.append(-10)
+            data.log.append(-1)
             data.log.append(self.receive_sign[1])
             data.log.append(self.receive_sign[1] == data.get_goal())
             data.logs.append(copy.deepcopy(data.log))
@@ -66,7 +66,7 @@ class Router:
         elif self.receive_occupation >= self.datasize * 0.5 and len(data) >= 0.1 * self.datasize:
             """如果接收队列的余量小于最大存储量的50%并且数据包的大小大于最大存储量的10%，也进行丢弃。"""
             data.log.append(self.receive_sign[1])
-            data.log.append(-10)
+            data.log.append(-1)
             data.log.append(self.receive_sign[1])
             data.log.append(self.receive_sign[1] == data.get_goal())
             data.logs.append(copy.deepcopy(data.log))

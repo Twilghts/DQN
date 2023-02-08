@@ -117,7 +117,7 @@
 ## [Test_official.py](模拟网络/Test_official.py)：
 > 该类是我对这个拓扑网络的正式测试，其完整的实现了数据包在网络中分发的具体情况。
 
-## [dqn_test.py](模拟网络/dqn_test.py)：
+## [dqn_test.py](模拟网络/dqn_train.py)：
 > 该类是我对DQN模型进行训练并与常规算法进行对比测试的类，这个类成功地证明了DQN对于
 > 寻路算法的优势。
 

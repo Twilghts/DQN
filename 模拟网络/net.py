@@ -13,7 +13,7 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_size = 40
+        self.data_number = 40
         self.G = nx.Graph()
         self.G.add_weighted_edges_from([(0, 1, 3.5), (0, 2, 3.0), (1, 2, 2.0), (1, 3, 2.5),
                                         (2, 5, 2.0), (3, 4, 7.0), (4, 5, 2.5), (5, 7, 1.5),
@@ -34,12 +34,13 @@ class Net:
             self.G.edges(data=True)
         }
         """数据包集合，一共有指定数目个数据包,每个数据包的大小都不同。"""
-        self.size_min = 500  # 数据包大小的最小值
-        self.size_max = 600  # 数据包大小的最大值
+        self.size_min = 600  # 数据包大小的最小值
+        self.size_max = 700  # 数据包大小的最大值
+        self.data_size = 700  # 数据包的大小
         """本数据集合用于充当背景环境。"""
-        self.data_set = {Data(x, y, size=random.randint(self.size_min, self.size_max), is_privacy=False) for x, y in
-                         zip(numpy.random.choice(self.G.nodes, self.data_size),
-                             numpy.random.choice(self.G.nodes, self.data_size)) if x != y}
+        self.data_set = {Data(x, y, size=self.data_size, is_privacy=False) for x, y in
+                         zip(numpy.random.choice(self.G.nodes, self.data_number),
+                             numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
         """信息流的记录信息,键为数据包本体，值为数据包在网络中传输的记录"""
         self.logs = {
             data: [] for data in self.data_set
@@ -52,10 +53,10 @@ class Net:
         """更新数据包内容。一部分是用于dqn训练，另一部分当作背景环境。
         :param is_privacy:
         """
-        self.data_set = {Data(x, y, size=random.randint(self.size_min, self.size_max), is_privacy=is_privacy) for x, y
+        self.data_set = {Data(x, y, size=self.data_size, is_privacy=is_privacy) for x, y
                          in
-                         zip(numpy.random.choice(self.G.nodes, self.data_size),
-                             numpy.random.choice(self.G.nodes, self.data_size)) if x != y}
+                         zip(numpy.random.choice(self.G.nodes, self.data_number),
+                             numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
 
     def show_graph(self):
         # 使用spring布局绘制图形
