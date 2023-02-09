@@ -13,7 +13,7 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number = 130
+        self.data_number = 50
         self.G = nx.Graph()
         self.G.add_weighted_edges_from([(0, 1, 3.5), (0, 2, 3.0), (1, 2, 2.0), (1, 3, 2.5),
                                         (2, 5, 2.0), (3, 4, 7.0), (4, 5, 2.5), (5, 7, 1.5),
@@ -135,12 +135,13 @@ class Net:
                 self.logs[data].append(time.perf_counter() - start_time)  # 统计总共的消耗时间
                 self.logs[data].append(False)
                 break
-            time.sleep(len(data) / self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
             self.calculate_handling_capacity(data.shortest_path[sign + 1], self.router_power)  # 更新路由器的吞吐量(入下一个路由器)
+            time.sleep(len(data) / self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
         """当数据包进入目标路由器时，与进入起始路由器时同样进行特殊处理"""
         if data.state == (0, data.get_goal()):
             """信息从最后一个路由器的接收队列进入最后一个路由器的发送队列"""
             self.routers[data.get_goal()].from_receive_queue_send_queue(data)
+            time.sleep(len(data) / self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
             self.routers[data.get_goal()].pop_send_queue(data)  # 信息从从最后一个路由器的发送队列出队
             self.calculate_handling_capacity(data.get_goal(), -self.router_power)  # 更新路由器的吞吐量(出最后一个路由器)
             """当数据包成功传输时所作的记录"""

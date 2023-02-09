@@ -10,6 +10,7 @@ _batch_size = 64  # 每次训练的数据组的数量。
 _interval_time = 0.01  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
+    start_time = time.perf_counter()
     dqn_net_agent = DqnNetworkAgent()
     average_loss = []  # 计算平均丢包率。
     model = tf.keras.models.load_model('model_3.h5')  # 加载模型
@@ -117,3 +118,4 @@ if __name__ == '__main__':
     # for router in random.sample(list(dqn_net_agent.routers.values()), 1):
     #     print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
     print(f'路由器:{3}的吞吐量为:{dqn_net_agent.routers[3].handling_capacity}')
+    print(f'消耗的总时间:{time.perf_counter() - start_time}秒')

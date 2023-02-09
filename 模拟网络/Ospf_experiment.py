@@ -9,6 +9,7 @@ from ospf_network import Ospf
 _interval_time = 0.01  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
+    start_time = time.perf_counter()
     ospf_net_ = Ospf()
     average_loss = []  # 计算平均丢包率。
     # model = tf.keras.models.load_model('model_1.h5')  # 加载模型
@@ -64,3 +65,4 @@ if __name__ == '__main__':
     # for router in random.sample(list(ospf_net_.routers.values()), 1):
     #     print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
     print(f'路由器:{3}的吞吐量为:{ospf_net_.routers[3].handling_capacity}')
+    print(f'消耗的总时间:{time.perf_counter() - start_time}秒')

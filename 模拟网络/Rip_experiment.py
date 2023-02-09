@@ -9,6 +9,7 @@ from rip_network import Rip
 _interval_time = 0.01  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
+    start_time = time.perf_counter()
     rip_net = Rip()
     average_loss = []  # 计算平均丢包率。
     """训练模型的全过程。"""
@@ -59,3 +60,4 @@ if __name__ == '__main__':
         print(f'数据包:{item[0]}的记录为{item[1]}')
     # for router in random.sample(list(rip_net.routers.values()), 1):
     print(f'路由器:{3}的吞吐量为:{rip_net.routers[3].handling_capacity}')
+    print(f'消耗的总时间:{time.perf_counter() - start_time}秒')
