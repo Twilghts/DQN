@@ -13,15 +13,16 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number = 50
+        self.data_number = 1000
+        self.router_datasize = 256
         self.G = nx.Graph()
-        self.G.add_weighted_edges_from([(0, 1, 3.5), (0, 2, 3.0), (1, 2, 2.0), (1, 3, 2.5),
+        self.G.add_weighted_edges_from([(0, 1, 4), (0, 2, 4.5), (1, 2, 4.2), (1, 3, 2.5),
                                         (2, 5, 2.0), (3, 4, 7.0), (4, 5, 2.5), (5, 7, 1.5),
                                         (4, 8, 3.0), (7, 8, 2.0), (6, 7, 0.5), (6, 10, 2.0),
                                         (8, 9, 1.5), (9, 10, 0.5)])
         """路由器组 为字典，键为路由器的编号，值为所对应的路由器"""
         self.routers = {
-            number: Router(number) for number in self.G.nodes
+            number: Router(number, datasize=self.router_datasize) for number in self.G.nodes
         }
         """构建每一个路由器的路由表"""
         for _router in self.routers.values():
@@ -48,8 +49,8 @@ class Net:
         self.logs = {
             data: [] for data in self.data_set
         }
-        self.time = 0  # 网络开始传输信息时的时间戳，用于计算吞吐量
-        self.router_power = 30000  # 路由器信息处理能力
+        self.time = 0  # 网络开始传输信息时的时间戳，传输过程中用于计算吞吐量，传输结束后用于计算总传播时间。
+        self.router_power = 2000  # 路由器信息处理能力
         self.waiting_time = 0.05  # 询问等待时间
 
     def update_dataset(self, is_privacy):
@@ -94,9 +95,9 @@ class Net:
             """否则则由传统算法计算最佳路径。"""
             data.shortest_path = self.routers[data.get_start()].routing_table[data.get_goal()]
         start_time = time.perf_counter()
-        """将信息放到第一个路由器的接收队列"""
+        """将信息放到第一个路由器的接收队列,如果路由器的可用数据量大于总数据量的一半时执行此操作。"""
         while True:
-            if len(data) <= self.routers[data.get_start()].get_receive_size():
+            if self.routers[data.get_start()].get_receive_size() >= self.router_datasize * 0.5:
                 self.routers[data.get_start()].put_receive_queue(data)  # 信息进入等待队列
                 self.calculate_handling_capacity(data.get_start(), self.router_power)  # 更新路由器的吞吐量(入第一个路由器)
                 time.sleep(len(data) / self.router_power)  # 信息在路由器接收队列的处理时间
@@ -140,8 +141,13 @@ class Net:
         """当数据包进入目标路由器时，与进入起始路由器时同样进行特殊处理"""
         if data.state == (0, data.get_goal()):
             """信息从最后一个路由器的接收队列进入最后一个路由器的发送队列"""
-            self.routers[data.get_goal()].from_receive_queue_send_queue(data)
-            time.sleep(len(data) / self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
+            while True:
+                if len(data) <= self.routers[data.get_goal()].get_send_size():
+                    self.routers[data.get_goal()].from_receive_queue_send_queue(data)  # 信息从接收队列移至发送队列,进行常规记录。
+                    time.sleep(len(data) / self.router_power)  # 信息在路由器发送队列的处理时间
+                    break
+                else:
+                    time.sleep(self.waiting_time)  # 轮询等待时间
             self.routers[data.get_goal()].pop_send_queue(data)  # 信息从从最后一个路由器的发送队列出队
             self.calculate_handling_capacity(data.get_goal(), -self.router_power)  # 更新路由器的吞吐量(出最后一个路由器)
             """当数据包成功传输时所作的记录"""

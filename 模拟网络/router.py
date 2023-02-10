@@ -6,7 +6,7 @@ _ip = ['10.0.0.' + str(n) for n in range(100)]
 
 
 class Router:
-    def __init__(self, number: int, speed=0.1, datasize=100):
+    def __init__(self, number: int, speed=0.1, datasize=256):
         self.sign = number  # 路由器的序号
         self._ip = _ip[number]  # ip地址
         self.datasize = datasize  # 队列的最大数据接收量
@@ -63,8 +63,8 @@ class Router:
             data.logs.append(copy.deepcopy(data.log))
             data.log.clear()
             return True
-        elif self.receive_occupation >= self.datasize * 0.5 and len(data) >= 0.1 * self.datasize:
-            """如果接收队列的余量小于最大存储量的50%并且数据包的大小大于最大存储量的10%，也进行丢弃。"""
+        elif self.get_receive_size() < 0.3 * self.datasize:
+            """如果接收队列的余量小于最大存储量的30%也进行丢弃。"""
             data.log.append(self.receive_sign[1])
             data.log.append(-1)
             data.log.append(self.receive_sign[1])

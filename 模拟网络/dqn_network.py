@@ -1,5 +1,3 @@
-import time
-
 from net import Net
 from 模拟网络.DQN import DQN
 from 模拟网络.利用network实现k最短路径算法 import k_shortest_paths

@@ -1,4 +1,3 @@
-import random
 import threading
 import time
 
@@ -12,8 +11,7 @@ if __name__ == '__main__':
     start_time = time.perf_counter()
     ospf_net_ = Ospf()
     average_loss = []  # 计算平均丢包率。
-    # model = tf.keras.models.load_model('model_1.h5')  # 加载模型
-    # ospf_net_.model = model
+    average_time = []  # 计算平均总时间。
     """训练模型的全过程。"""
     for i in range(25):
         """每传输一次数据，就把路由器的吞吐量记录清零"""
@@ -43,6 +41,7 @@ if __name__ == '__main__':
             """如果线程池被清空，则继续运行!"""
             if len(thread_pool) == 0:
                 break
+        average_time.append(time.perf_counter() - ospf_net_.time)  # 计算传输过程中所消耗的总时间。
         """计算丢包率!"""
         gross = 0  # 数据包总量
         failure = 0  # 失败的数据包数量
@@ -60,9 +59,16 @@ if __name__ == '__main__':
         f'这次数据包的大小:{ospf_net_.data_size},数据包个数{ospf_net_.data_number}。Ospf算法丢包率的集合:{average_loss}')
     print(
         f'这次数据包的大小:{ospf_net_.data_size},数据包个数{ospf_net_.data_number}。Ospf算法的平均丢包率:{np.mean(average_loss)}%')
-    for item in random.sample(list(ospf_net_.logs.items()), 1):
-        print(f'数据包:{item[0]}的记录为{item[1]}')
+    # success = [item[1][-2] for item in ospf_net_.logs.items() if item[1][-1]]  # 传输成功的数据包的时延的列表。
+    # failure = [item[1][-2] for item in ospf_net_.logs.items() if not item[1][-1]]  # 传输失败的数据包的时延的列表。
+    # mixture = random.sample(success, 4)
+    # mixture.extend(random.sample(failure, 1))
+    # print(f'这次数据包的大小:{ospf_net_.data_size},数据包个数{ospf_net_.data_number}。'
+    #       f'Ospf算法的数据包的平均时延为:{np.around(numpy.mean(mixture), decimals=4)}')
+    # for item in random.sample(list(ospf_net_.logs.items()), 1):
+    #     print(f'数据包:{item[0]}的记录为{item[1]}')
     # for router in random.sample(list(ospf_net_.routers.values()), 1):
     #     print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
+    print(f'数据传输过程中消耗的总时间为:{np.mean(average_time)}')
     print(f'路由器:{3}的吞吐量为:{ospf_net_.routers[3].handling_capacity}')
     print(f'消耗的总时间:{time.perf_counter() - start_time}秒')
