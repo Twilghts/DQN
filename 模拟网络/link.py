@@ -4,11 +4,11 @@ import collections
 class Link:
     def __init__(self, ports: tuple, length=10 ** 5, datasize=100, delay=0.5):
         self.link_deque = collections.deque(maxlen=datasize)  # 信道长度，设置最大传输数据量
-        self.length = length  # 链路长度
+        self.length: int = length  # 链路长度
         self.ports: tuple = ports  # 链路两端连接的路由器序号
-        self.delay = delay  # 单位为ms
-        self.occupation = 0  # 占用量
-        self.max_datasize = datasize  # 链路能承载的最大数据量
+        self.delay: float = delay  # 单位为秒
+        self.occupation: int = 0  # 占用量
+        self.max_datasize: int = datasize  # 链路能承载的最大数据量
 
     def __str__(self):
         return f'Link({self.ports}),长度为{self.delay}'

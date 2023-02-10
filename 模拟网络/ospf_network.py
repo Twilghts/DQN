@@ -36,9 +36,9 @@ class Ospf(Net):
 
     def send_message(self, data, is_dqn=False, path=None):
         """动态的计算最佳路径"""
-        state = data.get_start()  # 数据包最开始的状态
-        action = nx.dijkstra_path(self.dynamic_graph, data.get_start(), data.get_goal())[1]  # 动态的计算数据包所要经过的下一跳路由器。
-        start_time = time.perf_counter()
+        state: int = data.get_start()  # 数据包最开始的状态
+        action: int = nx.dijkstra_path(self.dynamic_graph, data.get_start(), data.get_goal())[1]  # 动态的计算数据包所要经过的下一跳路由器。
+        start_time: float = time.perf_counter()
         """将信息放到第一个路由器的接收队列,如果路由器的可用数据量大于总数据量的一半时执行此操作。"""
         while True:
             if self.routers[data.get_start()].get_receive_size() >= self.router_datasize * 0.5:
@@ -57,9 +57,9 @@ class Ospf(Net):
                     break
                 else:
                     time.sleep(self.waiting_time)  # 轮询等待时间
-            link_message = (state, action)  # 确定链路两个节点的前后顺序
+            link_message: tuple = (state, action)  # 确定链路两个节点的前后顺序
             if (action, state) in self.links.keys():
-                link_message = (action, state)
+                link_message: tuple = (action, state)
             """当信息不在链路上时一直轮询"""
             while True:
                 if len(data) <= self.links[link_message].read_data_size():
@@ -72,7 +72,7 @@ class Ospf(Net):
                     time.sleep(self.waiting_time)  # 轮询等待时间
             """此时信息已从链路上传递完成"""
             self.links[link_message].pop_data(data)  # 信息从链路中出队，不再等待
-            is_loss_package = self.routers[action].put_receive_queue(data)  # 信息从下一个接收队列入队，有丢包风险
+            is_loss_package: bool = self.routers[action].put_receive_queue(data)  # 信息从下一个接收队列入队，有丢包风险
             if is_loss_package:
                 """当数据包未能成功传输时所作的记录"""
                 self.logs[data] = copy.deepcopy(data.logs)
@@ -94,11 +94,11 @@ class Ospf(Net):
                 self.routers[data.get_goal()].pop_send_queue(data)  # 信息从从最后一个路由器的发送队列出队
                 self.calculate_handling_capacity(data.get_goal(), -self.router_power)  # 更新路由器的吞吐量(出最后一个路由器)
                 """当数据包成功传输时所作的记录"""
-                self.logs[data] = copy.deepcopy(data.logs)
+                self.logs[data]: list = copy.deepcopy(data.logs)
                 self.logs[data].append(round(time.perf_counter() - start_time, 5))  # 统计总共的消耗时间,保留五位小数。
                 self.logs[data].append(True)
                 break
             else:
                 """动态更新数据包下一跳要到达的路由器。"""
-                state = action
-                action = nx.dijkstra_path(self.dynamic_graph, state, data.get_goal())[1]
+                state: int = action
+                action: int = nx.dijkstra_path(self.dynamic_graph, state, data.get_goal())[1]

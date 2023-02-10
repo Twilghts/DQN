@@ -9,13 +9,13 @@ def k_shortest_paths(_G, s, t, K):
     # w(u, v): cost of directed edge from node u to node v (costs are non-negative)
 
     # Initialize the set of the shortest paths P to be empty
-    _P = set()
+    _P: set = set()
 
     # Initialize the count for all nodes u in the graph to be 0
-    count = {_u: 0 for _u in _G.nodes}
+    count: dict = {_u: 0 for _u in _G.nodes}
 
     # Initialize the heap B with the path Ps = {s} (a path consisting of just the source node s) with a cost of 0
-    b = [(0, [s])]
+    b: list = [(0, [s])]
 
     while b and count[t] < K:
         # Retrieve the path Pu with the lowest cost from the heap B

@@ -8,10 +8,10 @@ from rip_network import Rip
 _interval_time = 0.01  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
-    start_time = time.perf_counter()
+    start_time: float = time.perf_counter()
     rip_net = Rip()
-    average_loss = []  # 计算平均丢包率。
-    average_time = []  # 计算平均传播时延。
+    average_loss: list = []  # 计算平均丢包率。
+    average_time: list = []  # 计算平均传播时延。
     """训练模型的全过程。"""
     for i in range(25):
         """每传输一次数据，就把路由器的吞吐量记录清零"""
@@ -20,8 +20,8 @@ if __name__ == '__main__':
         rip_net.logs.clear()  # 每一轮发送信息之后清空记录。
         print(f'第{i + 1}次记录数据!')
         """准备进行网络拓扑中信息的传输!"""
-        thread_pool = []  # 线程池
-        rip_net.time = time.perf_counter()  # 更新网络开始时的时间戳，为计算吞吐量做准备
+        thread_pool: list = []  # 线程池
+        rip_net.time: float = time.perf_counter()  # 更新网络开始时的时间戳，为计算吞吐量做准备
         print(len(rip_net.data_set))
         """正式启动信息发送"""
         for data in rip_net.data_set:
@@ -42,8 +42,8 @@ if __name__ == '__main__':
                 break
         average_time.append(time.perf_counter() - rip_net.time)  # 计算传输过程中所消耗的总时间。
         """计算丢包率!"""
-        gross = 0  # 数据包总量
-        failure = 0  # 失败的数据包数量
+        gross: int = 0  # 数据包总量
+        failure: int = 0  # 失败的数据包数量
         for logs in rip_net.logs.values():
             gross += 1
             if not logs[-1]:

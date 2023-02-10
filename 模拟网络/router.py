@@ -7,19 +7,19 @@ _ip = ['10.0.0.' + str(n) for n in range(100)]
 
 class Router:
     def __init__(self, number: int, speed=0.1, datasize=256):
-        self.sign = number  # 路由器的序号
-        self._ip = _ip[number]  # ip地址
-        self.datasize = datasize  # 队列的最大数据接收量
+        self.sign: int = number  # 路由器的序号
+        self._ip: str = _ip[number]  # ip地址
+        self.datasize: int = datasize  # 队列的最大数据接收量
         self.send_queue = collections.deque(maxlen=datasize)  # 发送队列
-        self.send_occupation = 0  # 发送队列数据占用量
+        self.send_occupation: int = 0  # 发送队列数据占用量
         self.receive_queue = collections.deque(maxlen=datasize)  # 接收队列
-        self.receive_occupation = 0  # 接受队列数据占用量
-        self.routing_table = collections.defaultdict()  # 路由表
+        self.receive_occupation: int = 0  # 接受队列数据占用量
+        self.routing_table: dict = collections.defaultdict()  # 路由表
         self.routing_table.default_factory = None
-        self.speed = speed  # 单位为mb/ms
-        self.receive_sign = (0, number)  # 接收队列标志
-        self.send_sign = (number, 0)  # 发送队列标志
-        self.handling_capacity = []  # 用于计算吞吐量的列表，内部元素应该是一个个元组，每一个元组代表着路由器吞吐量的变化
+        self.speed: float = speed  # 单位为mb/ms
+        self.receive_sign: tuple = (0, number)  # 接收队列标志
+        self.send_sign: tuple = (number, 0)  # 发送队列标志
+        self.handling_capacity: list = []  # 用于计算吞吐量的列表，内部元素应该是一个个元组，每一个元组代表着路由器吞吐量的变化
 
     def __str__(self):
         return f'Router:{self.sign}'

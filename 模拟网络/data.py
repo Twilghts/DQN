@@ -4,17 +4,17 @@ import time
 
 class Data:
     def __init__(self, start, target, is_privacy, size=600, delay=0):
-        self.is_privacy = is_privacy
-        self._start = start  # 起始路由器标号
-        self._target = target  # 终止路由器标号
-        self._size = size  # 数据包大小
-        self.delay = delay  # 计算数据包传送中经过的时间
+        self.is_privacy: bool = is_privacy
+        self._start: int = start  # 起始路由器标号
+        self._target: int = target  # 终止路由器标号
+        self._size: int = size  # 数据包大小
+        self.delay: float = delay  # 计算数据包传送中经过的时间
         self.state: tuple = (0, start)  # 数据包的状态
-        self.shortest_path = []  # 从起点到终点的最短路径
-        self.log_delay = 0
-        self.logs = []  # 传递过程中记录的集合
-        self.log = []  # 信息传递过程中的每条记录
-        self.flag = 0  # flag标志位，标志数据是否隐私,0代表隐私数据，1代表公开数据
+        self.shortest_path: list = []  # 从起点到终点的最短路径
+        self.log_delay: float = 0
+        self.logs: list = []  # 传递过程中记录的集合
+        self.log: list = []  # 信息传递过程中的每条记录
+        self.flag: int = 0  # flag标志位，标志数据是否隐私,0代表隐私数据，1代表公开数据
 
     def __repr__(self):
         return f'Data({self._start},{self._target}),数据量为{self._size}'

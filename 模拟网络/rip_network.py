@@ -7,7 +7,7 @@ class Rip(Net):
     def __init__(self):
         super().__init__()
         for u, v in self.G.edges:
-            self.G[u][v]['weight'] = 1
+            self.G[u][v]['weight']: float = 1
         """构建每一个路由器的路由表"""
         for _router in self.routers.values():
             _router.routing_table = {

@@ -13,15 +13,15 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number = 500
-        self.router_datasize = 256
+        self.data_number: int = 300
+        self.router_datasize: int = 256
         self.G = nx.Graph()
         self.G.add_weighted_edges_from([(0, 1, 4), (0, 2, 4.5), (1, 2, 4.2), (1, 3, 2.5),
                                         (2, 5, 2.0), (3, 4, 7.0), (4, 5, 2.5), (5, 7, 1.5),
                                         (4, 8, 3.0), (7, 8, 2.0), (6, 7, 0.5), (6, 10, 2.0),
                                         (8, 9, 1.5), (9, 10, 0.5)])
         """路由器组 为字典，键为路由器的编号，值为所对应的路由器"""
-        self.routers = {
+        self.routers: dict = {
             number: Router(number, datasize=self.router_datasize) for number in self.G.nodes
         }
         """构建每一个路由器的路由表"""
@@ -30,39 +30,39 @@ class Net:
                 node: nx.dijkstra_path(self.G, _router.sign, node) for node in self.G.nodes
             }
         """网络连接组 为字典，键为起始路由器和终止路由器的元组，值为相对应的网络链接。"""
-        self.links = {
+        self.links: dict = {
             (start, target): Link((start, target), delay=weight['weight'] / 100) for start, target, weight in
             self.G.edges(data=True)
         }
         """数据包集合，一共有指定数目个数据包,每个数据包的大小都不同。"""
-        self.size_min = 600  # 数据包大小的最小值
-        self.size_max = 700  # 数据包大小的最大值
-        self.data_size = 64  # 数据包的大小
+        self.size_min: int = 600  # 数据包大小的最小值
+        self.size_max: int = 700  # 数据包大小的最大值
+        self.data_size: int = 64  # 数据包的大小
         """本数据集合用于充当背景环境。"""
-        self.data_set = {Data(x, y, size=self.data_size, is_privacy=False) for x, y in
-                         zip(numpy.random.choice(self.G.nodes, self.data_number),
-                             numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
+        self.data_set: set = {Data(x, y, size=self.data_size, is_privacy=False) for x, y in
+                              zip(numpy.random.choice(self.G.nodes, self.data_number),
+                                  numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
         while len(self.data_set) < self.data_number:
-            pair = random.sample(self.G.nodes, 2)
+            pair: tuple = random.sample(self.G.nodes, 2)
             self.data_set.add(Data(pair[0], pair[1], size=self.data_size, is_privacy=False))
         """信息流的记录信息,键为数据包本体，值为数据包在网络中传输的记录"""
-        self.logs = {
+        self.logs: dict = {
             data: [] for data in self.data_set
         }
-        self.time = 0  # 网络开始传输信息时的时间戳，传输过程中用于计算吞吐量，传输结束后用于计算总传播时间。
-        self.router_power = 2000  # 路由器信息处理能力
-        self.waiting_time = 0.05  # 询问等待时间
+        self.time: float = 0  # 网络开始传输信息时的时间戳，传输过程中用于计算吞吐量，传输结束后用于计算总传播时间。
+        self.router_power: int = 2000  # 路由器信息处理能力
+        self.waiting_time: float = 0.05  # 询问等待时间
 
     def update_dataset(self, is_privacy):
         """更新数据包内容。一部分是用于dqn训练，另一部分当作背景环境。
         :param is_privacy:
         """
-        self.data_set = {Data(x, y, size=self.data_size, is_privacy=is_privacy) for x, y
-                         in
-                         zip(numpy.random.choice(self.G.nodes, self.data_number),
-                             numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
+        self.data_set: set = {Data(x, y, size=self.data_size, is_privacy=is_privacy) for x, y
+                              in
+                              zip(numpy.random.choice(self.G.nodes, self.data_number),
+                                  numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
         while len(self.data_set) < self.data_number:
-            pair = random.sample(self.G.nodes, 2)
+            pair: tuple = random.sample(self.G.nodes, 2)
             self.data_set.add(Data(pair[0], pair[1], size=self.data_size, is_privacy=is_privacy))
 
     def show_graph(self):
@@ -94,7 +94,7 @@ class Net:
         else:
             """否则则由传统算法计算最佳路径。"""
             data.shortest_path = self.routers[data.get_start()].routing_table[data.get_goal()]
-        start_time = time.perf_counter()
+        start_time: float = time.perf_counter()
         """将信息放到第一个路由器的接收队列,如果路由器的可用数据量大于总数据量的一半时执行此操作。"""
         while True:
             if self.routers[data.get_start()].get_receive_size() >= self.router_datasize * 0.5:
@@ -114,9 +114,9 @@ class Net:
                     break
                 else:
                     time.sleep(self.waiting_time)  # 轮询等待时间
-            link_message = (data.shortest_path[sign + 1], data.shortest_path[sign])  # 确定链路两个节点的前后顺序
+            link_message: tuple = (data.shortest_path[sign + 1], data.shortest_path[sign])  # 确定链路两个节点的前后顺序
             if (data.shortest_path[sign], data.shortest_path[sign + 1]) in self.links.keys():
-                link_message = (data.shortest_path[sign], data.shortest_path[sign + 1])
+                link_message: tuple = (data.shortest_path[sign], data.shortest_path[sign + 1])
             """当信息不在链路上时一直轮询"""
             while True:
                 if len(data) <= self.links[link_message].read_data_size():
@@ -129,10 +129,11 @@ class Net:
                     time.sleep(self.waiting_time)  # 轮询等待时间
             """此时信息已从链路上传递完成"""
             self.links[link_message].pop_data(data)  # 信息从链路中出队，不再等待
-            is_loss_package = self.routers[data.shortest_path[sign + 1]].put_receive_queue(data)  # 信息从下一个接收队列入队，有丢包风险
+            """信息从下一个接收队列入队，有丢包风险"""
+            is_loss_package: bool = self.routers[data.shortest_path[sign + 1]].put_receive_queue(data)
             if is_loss_package:
                 """当数据包未能成功传输时所作的记录"""
-                self.logs[data] = copy.deepcopy(data.logs)
+                self.logs[data]: list = copy.deepcopy(data.logs)
                 self.logs[data].append(round(time.perf_counter() - start_time, 5))  # 统计总共的消耗时间
                 self.logs[data].append(False)
                 break
@@ -151,6 +152,6 @@ class Net:
             self.routers[data.get_goal()].pop_send_queue(data)  # 信息从从最后一个路由器的发送队列出队
             self.calculate_handling_capacity(data.get_goal(), -self.router_power)  # 更新路由器的吞吐量(出最后一个路由器)
             """当数据包成功传输时所作的记录"""
-            self.logs[data] = copy.deepcopy(data.logs)
+            self.logs[data]: list = copy.deepcopy(data.logs)
             self.logs[data].append(round(time.perf_counter() - start_time, 4))  # 统计总共的消耗时间,保留五位小数。
             self.logs[data].append(True)
