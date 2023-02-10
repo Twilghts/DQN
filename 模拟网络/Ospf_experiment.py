@@ -6,6 +6,7 @@ import numpy as np
 from ospf_network import Ospf
 
 _interval_time = 0.01  # 数据包发送的间隔时间。
+_update_interval_time = 0.02  # 动态更新全局网络间隔的时间
 
 if __name__ == '__main__':
     start_time = time.perf_counter()
@@ -21,8 +22,9 @@ if __name__ == '__main__':
         print(f'第{i + 1}次记录数据!')
         """准备进行网络拓扑中信息的传输!"""
         thread_pool = []  # 线程池
-        ospf_net_.time = time.perf_counter()  # 更新网络开始时的时间戳，为计算吞吐量做准备
         print(len(ospf_net_.data_set))
+        ospf_net_.time = time.perf_counter()  # 更新网络开始时的时间戳，为计算吞吐量做准备
+        count = 1  # 计算更新网络的次数，每0.2秒全局更新一次
         """正式启动信息发送"""
         for data in ospf_net_.data_set:
             task_thread = threading.Thread(target=ospf_net_.send_message,
@@ -31,6 +33,9 @@ if __name__ == '__main__':
             task_thread.start()  # 启动线程
             thread_pool.append(task_thread)  # 将线程添加到线程池
             time.sleep(_interval_time)  # 每隔_interval_time秒发送一个数据包
+            if time.perf_counter() - ospf_net_.time >= count * _update_interval_time:
+                ospf_net_.update_graph()
+                count += 1
         """测试所有的线程是否存活，如果所有线程都结束运行，则主线程继续运行"""
         while True:
             for thread in thread_pool:
@@ -54,6 +59,8 @@ if __name__ == '__main__':
         """每一次发送信息之后训练数据。"""
         """更新数据包集合，并随机修改数据包大小."""
         ospf_net_.update_dataset(False)
+        """将拷贝图回滚到初始状态。"""
+        ospf_net_.retry_graph()
 
     print(
         f'这次数据包的大小:{ospf_net_.data_size},数据包个数{ospf_net_.data_number}。Ospf算法丢包率的集合:{average_loss}')
@@ -69,6 +76,6 @@ if __name__ == '__main__':
     #     print(f'数据包:{item[0]}的记录为{item[1]}')
     # for router in random.sample(list(ospf_net_.routers.values()), 1):
     #     print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
-    print(f'数据传输过程中消耗的总时间为:{np.mean(average_time)}')
+    print(f'一次完整的数据传输过程中消耗的时间为:{np.mean(average_time)}')
     print(f'路由器:{3}的吞吐量为:{ospf_net_.routers[3].handling_capacity}')
     print(f'消耗的总时间:{time.perf_counter() - start_time}秒')

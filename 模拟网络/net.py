@@ -13,7 +13,7 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number = 1000
+        self.data_number = 500
         self.router_datasize = 256
         self.G = nx.Graph()
         self.G.add_weighted_edges_from([(0, 1, 4), (0, 2, 4.5), (1, 2, 4.2), (1, 3, 2.5),
@@ -133,7 +133,7 @@ class Net:
             if is_loss_package:
                 """当数据包未能成功传输时所作的记录"""
                 self.logs[data] = copy.deepcopy(data.logs)
-                self.logs[data].append(time.perf_counter() - start_time)  # 统计总共的消耗时间
+                self.logs[data].append(round(time.perf_counter() - start_time, 5))  # 统计总共的消耗时间
                 self.logs[data].append(False)
                 break
             self.calculate_handling_capacity(data.shortest_path[sign + 1], self.router_power)  # 更新路由器的吞吐量(入下一个路由器)
