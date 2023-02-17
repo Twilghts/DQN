@@ -41,7 +41,7 @@ class Ospf(Net):
         start_time: float = time.perf_counter()
         """将信息放到第一个路由器的接收队列,如果路由器的可用数据量大于总数据量的一半时执行此操作。"""
         while True:
-            if self.routers[data.get_start()].get_receive_size() >= self.router_datasize * 0.5:
+            if self.routers[data.get_start()].get_receive_size() >= self.routers[data.get_start()].datasize * 0.5:
                 self.routers[data.get_start()].put_receive_queue(data)  # 信息进入等待队列
                 self.calculate_handling_capacity(data.get_start(), self.router_power)  # 更新路由器的吞吐量(入第一个路由器)
                 time.sleep(len(data) / self.router_power)  # 信息在路由器接收队列的处理时间

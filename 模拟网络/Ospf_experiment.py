@@ -39,6 +39,9 @@ if __name__ == '__main__':
         """测试所有的线程是否存活，如果所有线程都结束运行，则主线程继续运行"""
         while True:
             for thread in thread_pool:
+                if time.perf_counter() - ospf_net_.time >= count * _update_interval_time:
+                    ospf_net_.update_graph()
+                    count += 1
                 """如果线程结束，从线程池中移除该线程，并打印出相关性息!"""
                 if not thread.is_alive():
                     thread_pool.remove(thread)
@@ -76,6 +79,6 @@ if __name__ == '__main__':
     #     print(f'数据包:{item[0]}的记录为{item[1]}')
     # for router in random.sample(list(ospf_net_.routers.values()), 1):
     #     print(f'路由器:{router}的吞吐量为:{router.handling_capacity}')
-    print(f'一次完整的数据传输过程中消耗的时间为:{np.mean(average_time)}')
+    print(f'这次数据包的大小:{ospf_net_.data_size},Ospf一次完整的数据传输过程中消耗的时间为:{np.mean(average_time)}')
     print(f'路由器:{3}的吞吐量为:{ospf_net_.routers[3].handling_capacity}')
     print(f'消耗的总时间:{time.perf_counter() - start_time}秒')

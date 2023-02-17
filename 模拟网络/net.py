@@ -13,16 +13,16 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number: int = 300
-        self.router_datasize: int = 256
+        self.data_number: int = 500
+        self.router_speed_list = [1, 3, 2, 4, 1, 3, 5, 3, 1, 2, 5]  # 设置路由器的处理速度。
         self.G = nx.Graph()
         self.G.add_weighted_edges_from([(0, 1, 4), (0, 2, 4.5), (1, 2, 4.2), (1, 3, 2.5),
                                         (2, 5, 2.0), (3, 4, 7.0), (4, 5, 2.5), (5, 7, 1.5),
                                         (4, 8, 3.0), (7, 8, 2.0), (6, 7, 0.5), (6, 10, 2.0),
                                         (8, 9, 1.5), (9, 10, 0.5)])
-        """路由器组 为字典，键为路由器的编号，值为所对应的路由器"""
+        """路由器组 为字典，键为路由器的编号，值为所对应的路由器,设置路由器的处理速度。"""
         self.routers: dict = {
-            number: Router(number, datasize=self.router_datasize) for number in self.G.nodes
+            number: Router(number, speed=self.router_speed_list[number]) for number in self.G.nodes
         }
         """构建每一个路由器的路由表"""
         for _router in self.routers.values():
@@ -97,7 +97,7 @@ class Net:
         start_time: float = time.perf_counter()
         """将信息放到第一个路由器的接收队列,如果路由器的可用数据量大于总数据量的一半时执行此操作。"""
         while True:
-            if self.routers[data.get_start()].get_receive_size() >= self.router_datasize * 0.5:
+            if self.routers[data.get_start()].get_receive_size() >= self.routers[data.get_start()].datasize * 0.5:
                 self.routers[data.get_start()].put_receive_queue(data)  # 信息进入等待队列
                 self.calculate_handling_capacity(data.get_start(), self.router_power)  # 更新路由器的吞吐量(入第一个路由器)
                 time.sleep(len(data) / self.router_power)  # 信息在路由器接收队列的处理时间

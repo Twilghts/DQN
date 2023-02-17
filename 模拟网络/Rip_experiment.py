@@ -21,7 +21,7 @@ if __name__ == '__main__':
         print(f'第{i + 1}次记录数据!')
         """准备进行网络拓扑中信息的传输!"""
         thread_pool: list = []  # 线程池
-        rip_net.time: float = time.perf_counter()  # 更新网络开始时的时间戳，为计算吞吐量做准备
+        rip_net.time = time.perf_counter()  # 更新网络开始时的时间戳，为计算吞吐量做准备
         print(len(rip_net.data_set))
         """正式启动信息发送"""
         for data in rip_net.data_set:
@@ -66,6 +66,6 @@ if __name__ == '__main__':
     # for item in random.sample(list(rip_net.logs.items()), 1):
     #     print(f'数据包:{item[0]}的记录为{item[1]}')
     # for router in random.sample(list(rip_net.routers.values()), 1):
-    print(f'一次数据传输过程中消耗的总时间平均为:{np.mean(average_time)}')
+    print(f'这次数据包的大小:{rip_net.data_size},Rip一次数据传输过程中消耗的总时间平均为:{np.mean(average_time)}')
     print(f'路由器:{3}的吞吐量为:{rip_net.routers[3].handling_capacity}')
     print(f'消耗的总时间:{time.perf_counter() - start_time}秒')
