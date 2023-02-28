@@ -41,6 +41,9 @@ if __name__ == '__main__':
             for thread in thread_pool:
                 """如果线程结束，从线程池中移除该线程，并打印出相关性息!"""
                 if not thread.is_alive():
+                    if time.perf_counter() - ospf_net_.time >= count * _update_interval_time:
+                        ospf_net_.update_graph()
+                        count += 1
                     thread_pool.remove(thread)
                     # print(f'线程{thread.name}结束运行')
             """如果线程池被清空，则继续运行!"""
