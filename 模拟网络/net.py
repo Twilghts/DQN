@@ -13,8 +13,8 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number: int = 300
-        self.router_datasize: int = 448
+        self.data_number: int = 100
+        self.router_datasize: int = 520
         self.G = nx.Graph()
         self.G.add_weighted_edges_from([(0, 1, 4), (0, 2, 4.5), (1, 2, 4.2), (1, 3, 2.5),
                                         (2, 5, 2.0), (3, 4, 7.0), (4, 5, 2.5), (5, 7, 1.5),

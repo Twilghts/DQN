@@ -1,3 +1,4 @@
+import logging
 import threading
 import time
 
@@ -6,8 +7,12 @@ import tensorflow as tf
 
 from dqn_network import DqnNetworkAgent
 
+# configure the logging module
+logging.basicConfig(filename='记录.log', level=logging.DEBUG,
+                    format='%(asctime)s:%(message)s', encoding='utf-8')
+
 _batch_size: int = 64  # 每次训练的数据组的数量。
-_interval_time: float = 0.01  # 数据包发送的间隔时间。
+_interval_time: float = 0.013  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
     start_time: float = time.perf_counter()
@@ -118,8 +123,11 @@ if __name__ == '__main__':
         dqn_net_agent.update_dataset(True)
 
     print(
-        f'这次数据包的大小:{dqn_net_agent.data_size},数据包个数{dqn_net_agent.data_number}。使用DQN算法的平均丢包率:{np.mean(average_loss)}%')
-    print(f'这次数据包的大小:{dqn_net_agent.data_size},数据包个数{dqn_net_agent.data_number}。使用DQN算法的丢包率的集合:{average_loss}')
+        f'路由器的容量为:{dqn_net_agent.router_datasize},这次数据包的大小:{dqn_net_agent.data_size},数据包个数{dqn_net_agent.data_number}'
+        f'。使用DQN算法的平均丢包率:{np.mean(average_loss)}%')
+    logging.info(
+        f'路由器的容量为:{dqn_net_agent.router_datasize},这次数据包的大小:{dqn_net_agent.data_size},数据包个数{dqn_net_agent.data_number}'
+        f'。使用DQN算法的平均丢包率:{np.mean(average_loss)}%')
     # success = [item[1][-2] for item in dqn_net_agent.logs.items() if item[1][-1]]  # 传输成功的数据包的时延的列表。
     # failure = [item[1][-2] for item in dqn_net_agent.logs.items() if not item[1][-1]]  # 传输失败的数据包的时延的列表。
     # mixture = random.sample(success, 4)

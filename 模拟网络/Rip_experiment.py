@@ -1,11 +1,16 @@
 import threading
 import time
+import logging
 
 import numpy as np
 
 from rip_network import Rip
 
-_interval_time = 0.01  # 数据包发送的间隔时间。
+# configure the logging module
+logging.basicConfig(filename='记录.log', level=logging.DEBUG,
+                    format='%(asctime)s:%(message)s', encoding='utf-8')
+
+_interval_time = 0.013  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
     start_time: float = time.perf_counter()
@@ -54,9 +59,11 @@ if __name__ == '__main__':
         rip_net.update_dataset(False)
 
     print(
-        f'这次数据包的大小:{rip_net.data_size},数据包个数{rip_net.data_number}。Rip算法丢包率的集合:{average_loss}')
-    print(
-        f'这次数据包的大小:{rip_net.data_size},数据包个数{rip_net.data_number}。Rip算法的平均丢包率:{np.mean(average_loss)}%')
+        f'路由器的容量为:{rip_net.router_datasize},这次数据包的大小:{rip_net.data_size},数据包个数{rip_net.data_number}。'
+        f'Rip算法丢包率的集合:{average_loss}')
+    logging.info(
+        f'路由器的容量为:{rip_net.router_datasize},这次数据包的大小:{rip_net.data_size},数据包个数{rip_net.data_number}'
+        f'。使用Rip算法的平均丢包率:{np.mean(average_loss)}%')
     # success = [item[1][-2] for item in rip_net.logs.items() if item[1][-1]]  # 传输成功的数据包的时延的列表。
     # failure = [item[1][-2] for item in rip_net.logs.items() if not item[1][-1]]  # 传输失败的数据包的时延的列表。
     # mixture = random.sample(success, 4)
