@@ -5,6 +5,17 @@ import numpy as np
 import tensorflow as tf
 
 
+def calculate_state(data: float) -> int:
+    net_state = 0  # 默认不忙碌
+    if 0.45 < data <= 0.66:
+        net_state = 1  # 最低级别忙碌
+    elif 0.66 < data <= 0.9:
+        net_state = 2  # 次高级别忙碌
+    elif data > 0.9:
+        net_state = 3  # 最高级别忙碌
+    return net_state
+
+
 class DQN:
     def __init__(self, state_size, action_size):
         self.state_size: int = state_size
@@ -30,7 +41,7 @@ class DQN:
         #  储存回放缓存
         self.memory.append((_state, _action, reward, _next_state, done))
 
-    def choose_path(self, paths, is_best=False):
+    def choose_path(self, paths, state, is_best=False):
         #  进行探索
         #  随机探索
         if np.random.rand() <= self.epsilon and not is_best:
@@ -41,7 +52,9 @@ class DQN:
             """为每条路径算出预期奖励值"""
             value: float = 0
             for i in range(len(_path) - 1):
-                value += self.model(np.array([_path[i]])).numpy()[0][_path[i + 1]]
+                state_now = _path[i] * 4 + calculate_state(state[_path[i]][0])
+                state_next = _path[i + 1] * 4 + calculate_state(state[_path[i + 1]][0])
+                value += self.model(np.array([state_now])).numpy()[0][state_next]
             values[value] = _path
         """通过每条路径奖励值的大小选择最佳路径"""
         path: list = max([_item for _item in values.items()],
@@ -58,7 +71,7 @@ class DQN:
                 """下一个状态下的所有预测值，并计算下一个状态下所有action带来的奖励中最低的"""
                 values: list = self.model(np.array([_next_state])).numpy()
                 target: float = reward + self.gamma * min(
-                    [values[0][next_s] for next_s, a in graph[_next_state].items()])
+                    [values[0][node * 4 + net_state] for node in graph[_next_state].keys() for net_state in range(4)])
             target_f[0][_action]: float = target
             self.model.fit(np.array([_state]), target_f, epochs=1, verbose=0)
         #  降低随机探索的概率

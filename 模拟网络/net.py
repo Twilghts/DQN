@@ -9,8 +9,8 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number_min = 30
-        self.data_number_max = 50
+        self.data_number_min = 350
+        self.data_number_max = 400
         self.G = nx.read_graphml("graph.graphml")
         """读取出来的图的节点是字符串类型的，离谱！要更改节点的名字"""
         relabel_table = {
@@ -30,7 +30,7 @@ class Net:
             (start, target): Link((start, target), delay=0.001) for start, target in self.G.edges
         }
         """数据包集合，一共有指定数目个数据包,每个数据包的大小都不同。"""
-        self.data_size: int = 64  # 数据包的大小
+        self.data_size: int = 10  # 数据包的大小
         """本数据集合用于充当背景环境。"""
         self.data_set: set = set()
         """信息流的记录信息,键为数据包本体，值为数据包在网络中传输的记录, 为DQN训练做准备"""
