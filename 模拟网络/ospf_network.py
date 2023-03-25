@@ -12,7 +12,6 @@ class Ospf(Net):
     def __init__(self):
         super().__init__()
         self.dynamic_graph = copy.deepcopy(self.G)  # 创建一个副本图，用于体现Ospf的动态性。
-        self.update_dataset()
 
     """在传输信息的同时对网络进行动态更新"""
 
@@ -26,7 +25,7 @@ class Ospf(Net):
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
-                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 2000
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 1500
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
             elif 0.66 < router.cache / router.datasize <= 0.9:
                 """次高级别繁忙"""
@@ -34,15 +33,15 @@ class Ospf(Net):
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
-                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 5000
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 2000
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
-            else:
+            elif router.cache / router.datasize > 0.9:
                 """最高级别繁忙"""
                 """获取直接与该节点相接的链路。"""
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
-                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 10000
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 4000
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
         """获取所有未经修改的边。"""
         dismodificate_edges: set = {(u, v) for u, v in self.dynamic_graph.edges if (u, v) not in modificate_edges}

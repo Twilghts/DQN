@@ -9,8 +9,8 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number_min = 50
-        self.data_number_max = 100
+        self.data_number_min = 30
+        self.data_number_max = 50
         self.G = nx.read_graphml("graph.graphml")
         """读取出来的图的节点是字符串类型的，离谱！要更改节点的名字"""
         relabel_table = {
@@ -43,9 +43,16 @@ class Net:
 
     def get_net_state(self) -> dict:
         return {
-            router.sign: (router.cache / router.datasize, router.failure / router.total) for router in
+            router.sign: (router.cache / router.datasize, self.calculate_loss(router.sign)) for router in
             self.routers.values()
         }
+    """专门计算丢包率的函数，之前没想到数据包数量不够，经过一个路由器的数据包数量会是0"""
+    def calculate_loss(self, number):
+        router = self.routers[number]
+        if router.total != 0:
+            return router.failure / router.total
+        else:
+            return 0
 
     def update_dataset(self):
         """更新数据包内容。一部分是用于dqn训练，另一部分当作背景环境。此函数由子类重写

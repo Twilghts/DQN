@@ -10,7 +10,7 @@ if __name__ == '__main__':
         print(ospf_network.get_net_state())
         print("*************************************\n")
         time.sleep(0.01)
-    for i in range(15):
+    for i in range(40):
         ospf_network.update_dataset(is_create_data=False)
         print(ospf_network.get_net_state())
         print("*************************************\n")
