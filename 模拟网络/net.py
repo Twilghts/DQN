@@ -9,8 +9,8 @@ from router import Router
 
 class Net:
     def __init__(self):
-        self.data_number_min = 350
-        self.data_number_max = 400
+        self.data_number_min = 400
+        self.data_number_max = 500
         self.G = nx.read_graphml("graph.graphml")
         """读取出来的图的节点是字符串类型的，离谱！要更改节点的名字"""
         relabel_table = {

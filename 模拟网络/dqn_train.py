@@ -10,20 +10,29 @@ _batch_size: int = 64  # 每次训练的数据组的数量。
 _interval_time: float = 0.01  # 数据包发送的间隔时间。
 
 if __name__ == '__main__':
-    start_time: float = time.perf_counter()
     dqn_net_agent = DqnNetworkAgent()
-    average_loss: list = []  # 计算平均丢包率。
-    average_time: list = []  # 计算平均传播时延。
+    # average_loss: list = []  # 计算平均丢包率。
+    # average_time: list = []  # 计算平均传播时延。
     # model = tf.keras.models.load_model('model_7.h5')  # 加载模型
     # dqn_net_agent.model = model
-    for i in range(10):
-        dqn_net_agent.update_dataset()
-        print(dqn_net_agent.get_net_state())
-        print("*************************************\n")
-    for i in range(250):
-        dqn_net_agent.update_dataset(is_create_data=False)
-        print(dqn_net_agent.get_net_state())
-        print("*************************************\n")
+    start_time: float = time.perf_counter()
+    count = 0
+    for episode in range(1000):
+        for i in range(10):
+            dqn_net_agent.update_dataset()
+            for j in range(10):
+                dqn_net_agent.update_dataset(is_create_data=False)
+        while True:
+            dqn_net_agent.update_dataset(is_create_data=False)
+            count += 1
+            state = [item[0] for item in dqn_net_agent.get_net_state().values()]
+            if not any(state):  # 所有路由器全为空
+                print(f'第{episode}轮训练**************************************\n')
+                print(dqn_net_agent.get_net_state())
+                break
+        dqn_net_agent.replay(128, dqn_net_agent.G)
+    print(f'消耗时间:{time.perf_counter() - start_time}')
+    print(count)
     # """训练模型的全过程。"""
     # for i in range(1000):
     #     print(f'第{i + 1}次记录并训练数据!')

@@ -8,10 +8,6 @@ from 利用network实现k最短路径算法 import k_shortest_paths
 # G = nx.grid_graph(dim=[5, 2])
 # G = nx.watts_strogatz_graph(16, 4, 0.2)
 # G = nx.barabasi_albert_graph(13, 2)
-# relabel_table = {
-#     number: int(number) for number in G.nodes
-# }
-# G = nx.relabel_nodes(G, relabel_table)
 # nx.write_graphml(G, "graph.graphml")
 G = nx.read_graphml("graph.graphml")
 relabel_table = {

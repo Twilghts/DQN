@@ -28,4 +28,6 @@ def normal_uniform(u, sigma, n):
 print(normal_uniform(1000, 150, 16))
 
 deque = collections.deque(maxlen=100)
-print(deque.pop())
+print(all([1, 1, 1, 1, 1, 1]))
+print(any([0, 0, 0, 0]))
+print(7 // 4)

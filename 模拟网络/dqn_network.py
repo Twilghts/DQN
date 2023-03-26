@@ -19,6 +19,7 @@ class DqnNetworkAgent(Net, DQN):
         return k_shortest_paths(self.G, data.get_start(), data.get_goal(), self._k)
 
     def update_dataset(self, is_create_data=True):
+        is_empty = False
         if is_create_data:
             state = self.get_net_state()  # 根据网络环境的状态选择路径(action)
             data_number = random.randint(self.data_number_min, self.data_number_max)
