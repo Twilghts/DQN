@@ -20,7 +20,7 @@ if __name__ == '__main__':
     for episode in range(1000):
         for i in range(10):
             dqn_net_agent.update_dataset()
-            for j in range(10):
+            for j in range(25):
                 dqn_net_agent.update_dataset(is_create_data=False)
         while True:
             dqn_net_agent.update_dataset(is_create_data=False)
@@ -30,7 +30,8 @@ if __name__ == '__main__':
                 print(f'第{episode}轮训练**************************************\n')
                 print(dqn_net_agent.get_net_state())
                 break
-        dqn_net_agent.replay(128, dqn_net_agent.G)
+        dqn_net_agent.replay(256, dqn_net_agent.G)
+    dqn_net_agent.model.save('model_1.h5')
     print(f'消耗时间:{time.perf_counter() - start_time}')
     print(count)
     # """训练模型的全过程。"""

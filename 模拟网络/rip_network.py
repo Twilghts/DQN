@@ -17,12 +17,12 @@ class Rip(Net):
             _router.routing_table = {
                 node: nx.dijkstra_path(self.G, _router.sign, node) for node in self.G.nodes
             }
-        self.update_dataset()
 
     def update_dataset(self, is_create_data=True):
         """如果选择创建数据包，就创建并转发数据包"""
         if is_create_data:
-            data_number = random.randint(self.data_number_min, self.data_number_max)
+            # data_number = random.randint(self.data_number_min, self.data_number_max)
+            data_number = 500
             self.data_set: set = {Data(x, y, size=self.data_size) for x, y
                                   in
                                   zip(numpy.random.choice(self.G.nodes, data_number),

@@ -13,7 +13,6 @@ class DqnNetworkAgent(Net, DQN):
         Net.__init__(self)
         DQN.__init__(self, state_size=1, action_size=len(self.G.nodes) * 4)
         self._k: int = 3  # k最短路径算法中路径的条数
-        self.update_dataset()
 
     def k_shortest_paths_by_dqn(self, data):
         return k_shortest_paths(self.G, data.get_start(), data.get_goal(), self._k)
@@ -22,7 +21,8 @@ class DqnNetworkAgent(Net, DQN):
         is_empty = False
         if is_create_data:
             state = self.get_net_state()  # 根据网络环境的状态选择路径(action)
-            data_number = random.randint(self.data_number_min, self.data_number_max)
+            # data_number = random.randint(self.data_number_min, self.data_number_max)
+            data_number = 500
             self.data_set: set = {Data(x, y, size=self.data_size) for x, y
                                   in
                                   zip(numpy.random.choice(self.G.nodes, data_number),

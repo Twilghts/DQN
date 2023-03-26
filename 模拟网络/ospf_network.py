@@ -33,7 +33,7 @@ class Ospf(Net):
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
-                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 2000
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 1750
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
             elif router.cache / router.datasize > 0.9:
                 """最高级别繁忙"""
@@ -41,7 +41,7 @@ class Ospf(Net):
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
-                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 4000
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 2500
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
         """获取所有未经修改的边。"""
         dismodificate_edges: set = {(u, v) for u, v in self.dynamic_graph.edges if (u, v) not in modificate_edges}
@@ -56,7 +56,8 @@ class Ospf(Net):
 
     def update_dataset(self, is_create_data=True):
         if is_create_data:
-            data_number = random.randint(self.data_number_min, self.data_number_max)
+            # data_number = random.randint(self.data_number_min, self.data_number_max)
+            data_number = 500
             self.data_set: set = {Data(x, y, size=self.data_size) for x, y
                                   in
                                   zip(numpy.random.choice(self.G.nodes, data_number),
