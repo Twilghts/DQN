@@ -42,4 +42,4 @@ class Data:
     """记录数据，是DQN训练的重要保障"""
 
     def loging(self, number):
-        self.logs.append(0.05 + (number + 1) * 0.01)
+        self.logs.append(- (0.05 + (number + 1) * 0.01))

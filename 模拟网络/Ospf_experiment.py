@@ -6,16 +6,16 @@ import numpy as np
 from ospf_network import Ospf
 
 if __name__ == '__main__':
-    cache_size: int = 300
+    cache_size: int = 50
     logging.basicConfig(filename='log.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     ospf_network = Ospf()
     start_time: float = time.perf_counter()
     loss_sets = []
-    for episode in range(100):
+    for episode in range(1):
         ospf_network.total_data_number = 0
         ospf_network.success_data_number = 0
-        for i in range(20):
+        for i in range(10):
             ospf_network.update_dataset()
             for j in range(cache_size):
                 ospf_network.update_dataset(is_create_data=False)

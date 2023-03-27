@@ -22,7 +22,6 @@ class Rip(Net):
         """如果选择创建数据包，就创建并转发数据包"""
         if is_create_data:
             # data_number = random.randint(self.data_number_min, self.data_number_max)
-            self.total_data_number += self.data_number
             self.data_set: set = {Data(x, y, size=self.data_size) for x, y
                                   in
                                   zip(numpy.random.choice(self.G.nodes, self.data_number),
@@ -31,8 +30,10 @@ class Rip(Net):
                 pair: tuple = random.sample(self.G.nodes, 2)
                 self.data_set.add(Data(pair[0], pair[1], size=self.data_size))
             for data in self.data_set:
-                data.shortest_path = nx.dijkstra_path(self.G, data.get_start(), data.get_goal())
-                self.routers[data.shortest_path[data.count]].put_receive_queue(data)
+                if self.routers[data.get_start()].datasize - self.routers[data.get_start()].cache >= data.size:
+                    data.shortest_path = nx.dijkstra_path(self.G, data.get_start(), data.get_goal())
+                    self.routers[data.shortest_path[data.count]].put_receive_queue(data)
+                    self.total_data_number += 1
         """转发每个路由器中队首的数据包，放入链路中"""
         for router in self.routers.values():
             data = router.pop_send_queue()

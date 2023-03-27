@@ -62,7 +62,7 @@ class Router:
     """将数据发送至接受队列,传输失败返回False,传输成功返回True"""
 
     def put_receive_queue(self, data):
-        if len(data) + self.cache > self.datasize:
+        if len(data) + self.cache > self.datasize:  # 数据包丢失
             self.failure += 1
             self.total += 1
             return False
