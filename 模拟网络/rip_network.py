@@ -22,12 +22,12 @@ class Rip(Net):
         """如果选择创建数据包，就创建并转发数据包"""
         if is_create_data:
             # data_number = random.randint(self.data_number_min, self.data_number_max)
-            data_number = 500
+            self.total_data_number += self.data_number
             self.data_set: set = {Data(x, y, size=self.data_size) for x, y
                                   in
-                                  zip(numpy.random.choice(self.G.nodes, data_number),
-                                      numpy.random.choice(self.G.nodes, data_number)) if x != y}
-            while len(self.data_set) < data_number:
+                                  zip(numpy.random.choice(self.G.nodes, self.data_number),
+                                      numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
+            while len(self.data_set) < self.data_number:
                 pair: tuple = random.sample(self.G.nodes, 2)
                 self.data_set.add(Data(pair[0], pair[1], size=self.data_size))
             for data in self.data_set:
@@ -46,4 +46,6 @@ class Rip(Net):
         for link in self.links.values():
             data = link.pop_data()
             if data is not None:
-                self.routers[data.shortest_path[data.count]].put_receive_queue(data)
+                is_success = self.routers[data.shortest_path[data.count]].put_receive_queue(data)
+                if is_success:
+                    self.success_data_number += 1

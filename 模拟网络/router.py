@@ -65,10 +65,13 @@ class Router:
         if len(data) + self.cache > self.datasize:
             self.failure += 1
             self.total += 1
+            return False
         elif self.sign == data.get_goal():  # 成功传输至终点路由器
             self.total += 1
+            return True
         else:
             self.receive_queue.put(data)
             self.total += 1
             self.cache += len(data)
             data.loging(self.cache // len(data))
+            return False

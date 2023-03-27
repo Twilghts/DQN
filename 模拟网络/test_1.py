@@ -31,3 +31,5 @@ deque = collections.deque(maxlen=100)
 print(all([1, 1, 1, 1, 1, 1]))
 print(any([0, 0, 0, 0]))
 print(7 // 4)
+for step in range(30, 100, 10):
+    print(step)
