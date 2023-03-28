@@ -6,13 +6,13 @@ import numpy as np
 from ospf_network import Ospf
 
 if __name__ == '__main__':
-    cache_size: int = 50
+    cache_size: int = 70
     logging.basicConfig(filename='log.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     ospf_network = Ospf()
     start_time: float = time.perf_counter()
     loss_sets = []
-    for episode in range(1):
+    for episode in range(10):
         ospf_network.total_data_number = 0
         ospf_network.success_data_number = 0
         for i in range(10):
@@ -25,6 +25,9 @@ if __name__ == '__main__':
             if not any(state):  # 所有路由器全为空
                 ospf_network.retry_graph()
                 break
+        for data in ospf_network.data_set:
+            if len(data.logs) != 0 and not data.logs[-1][-1]:
+                print(data.shortest_path, data.logs)
         print(f'消耗时间:{time.perf_counter() - start_time}')
         print(
             f'丢包率:{(ospf_network.total_data_number - ospf_network.success_data_number) / ospf_network.total_data_number}')

@@ -14,9 +14,9 @@ relabel_table = {
     number: int(number) for number in G.nodes
 }
 G = nx.relabel_nodes(G, relabel_table)
-router_capacities = [919, 753, 883, 911, 1367, 552, 552, 1075, 1087, 1057, 633, 1141, 1080, 749, 1405, 856]
-for u, v in G.edges:
-    G[u][v]['weight']: int = (router_capacities[u] + router_capacities[v]) // 2
+# router_capacities = [919, 753, 883, 911, 1367, 552, 552, 1075, 1087, 1057, 633, 1141, 1080, 749, 1405, 856]
+# for u, v in G.edges:
+#     G[u][v]['weight']: int = (router_capacities[u] + router_capacities[v]) // 2
 # 使用spring布局绘制图形
 pos = nx.spring_layout(G)
 nx.draw(G, pos, with_labels=True)

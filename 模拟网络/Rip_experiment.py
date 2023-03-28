@@ -12,7 +12,7 @@ if __name__ == '__main__':
     rip_network = Rip()
     start_time: float = time.perf_counter()
     loss_sets = []
-    for episode in range(1):
+    for episode in range(10):
         rip_network.total_data_number = 0
         rip_network.success_data_number = 0
         for i in range(10):
@@ -25,7 +25,7 @@ if __name__ == '__main__':
             if not any(state):  # 所有路由器全为空
                 break
         for data in rip_network.data_set:
-            if len(data.logs) != 0:
+            if len(data.logs) != 0 and data.logs[-1][-3] == -5:
                 print(data.shortest_path, data.logs)
         print(f'消耗时间:{time.perf_counter() - start_time}')
         print(

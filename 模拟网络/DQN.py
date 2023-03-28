@@ -5,27 +5,16 @@ import numpy as np
 import tensorflow as tf
 
 
-def calculate_state(data: float) -> int:
-    net_state = 0  # 默认不忙碌
-    if 0.45 < data <= 0.66:
-        net_state = 1  # 最低级别忙碌
-    elif 0.66 < data <= 0.9:
-        net_state = 2  # 次高级别忙碌
-    elif data > 0.9:
-        net_state = 3  # 最高级别忙碌
-    return net_state
-
-
 class DQN:
     def __init__(self, state_size, action_size):
-        self.state_size: int = state_size
-        self.action_size: int = action_size
-        self.memory: deque = deque(maxlen=12800)
-        self.gamma: float = 0.95  # 折扣率
-        self.epsilon: float = 1.0  # 随机探索率
-        self.epsilon_min: float = 0.001  # 最低随机探索率
-        self.epsilon_decay: float = 0.995  # 探索率下降指数
-        self.learning_rate: float = 0.01  # 学习率
+        self.state_size = state_size
+        self.action_size = action_size
+        self.gamma = 0.95  # 折扣率
+        self.epsilon = 1.0  # 随机探索率
+        self.epsilon_min = 0.05  # 最低随机探索率
+        self.epsilon_decay = 0.997  # 探索率下降指数
+        self.learning_rate = 0.01  # 学习率
+        self.memory: deque = deque(maxlen=10000)
         self.model = self._build_model()  # 建造模型
 
     def _build_model(self):
@@ -41,7 +30,7 @@ class DQN:
         #  储存回放缓存
         self.memory.append((_state, _action, reward, _next_state, done))
 
-    def choose_path(self, paths, state, is_best=False):
+    def choose_path(self, paths, is_best=False):
         #  进行探索
         #  随机探索
         if np.random.rand() <= self.epsilon and not is_best:
@@ -52,9 +41,7 @@ class DQN:
             """为每条路径算出预期奖励值"""
             value: float = 0
             for i in range(len(_path) - 1):
-                state_now = _path[i] * 4 + calculate_state(state[_path[i]][0])
-                state_next = _path[i + 1] * 4 + calculate_state(state[_path[i + 1]][0])
-                value += self.model(np.array([state_now])).numpy()[0][state_next]
+                value += self.model(np.array([_path[i]])).numpy()[0][_path[i + 1]]
             values[value] = _path
         """通过每条路径奖励值的大小选择最佳路径"""
         path: list = max([_item for _item in values.items()],
@@ -63,18 +50,18 @@ class DQN:
 
     def replay(self, batch_size, graph):
         #  取小批量数据优化模型
-        minibatch: list = random.sample(self.memory, batch_size)
+        minibatch = random.sample(self.memory, batch_size)
         for _state, _action, reward, _next_state, done in minibatch:
-            target: float = reward
-            target_f: list = self.model(np.array([_state])).numpy()  # 当前状态下的所有预测值
+            target = reward
+            target_f = self.model(np.array([_state])).numpy()  # 当前状态下的所有预测值
             if not done:
-                """下一个状态下的所有预测值，并计算下一个状态下所有action带来的奖励中最低的"""
-                values: list = self.model(np.array([_next_state])).numpy()
+                """下一个状态下的所有预测值，并计算下一个状态下所有action带来的奖励中最高的"""
+                values = self.model(np.array([_next_state])).numpy()
                 target: float = reward + self.gamma * max(
-                    [values[0][node * 4 + net_state] for node in graph[_next_state // 4].keys() for net_state in
-                     range(4)])
-            target_f[0][_action]: float = target
+                    [values[0][next_s] for next_s in graph[_next_state].keys()])
+            target_f[0][_action] = target
             self.model.fit(np.array([_state]), target_f, epochs=1, verbose=0)
         #  降低随机探索的概率
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+

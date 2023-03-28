@@ -13,26 +13,27 @@ class DqnNetworkAgent(Net, DQN):
         Net.__init__(self)
         DQN.__init__(self, state_size=1, action_size=len(self.G.nodes) * 4)
         self._k: int = 3  # k最短路径算法中路径的条数
+        self.packet_for_record = set()
 
     def k_shortest_paths_by_dqn(self, data):
         return k_shortest_paths(self.G, data.get_start(), data.get_goal(), self._k)
 
     def update_dataset(self, is_create_data=True, is_best=False):
         if is_create_data:
-            state = self.get_net_state()  # 根据网络环境的状态选择路径(action)
-            # data_number = random.randint(self.data_number_min, self.data_number_max)
-            self.total_data_number += self.data_number
+            data_number = random.randint(self.data_number_min, self.data_number_max)
             self.data_set: set = {Data(x, y, size=self.data_size) for x, y
                                   in
                                   zip(numpy.random.choice(self.G.nodes, data_number),
                                       numpy.random.choice(self.G.nodes, data_number)) if x != y}
-            while len(self.data_set) < data_number:
+            while len(self.data_set) < self.data_number:
                 pair: tuple = random.sample(self.G.nodes, 2)
                 self.data_set.add(Data(pair[0], pair[1], size=self.data_size))
             for data in self.data_set:
-                paths = self.k_shortest_paths_by_dqn(data)
-                data.shortest_path = self.choose_path(paths, state, is_best=is_best)
-                self.routers[data.shortest_path[data.count]].put_receive_queue(data)
+                if self.routers[data.get_start()].datasize - self.routers[data.get_start()].cache >= data.size:
+                    self.total_data_number += 1
+                    paths = self.k_shortest_paths_by_dqn(data)
+                    data.shortest_path = self.choose_path(paths, is_best=is_best)
+                    self.routers[data.shortest_path[data.count]].put_receive_queue(data)
         """获取网络状态，将数据存入DQN的回放缓存中，准备训练"""
         state = self.get_net_state()
         preprocessing = {
@@ -54,11 +55,6 @@ class DqnNetworkAgent(Net, DQN):
             if data is not None:
                 router_now_sign = data.shortest_path[data.count]
                 router_next_sign = data.shortest_path[data.count + 1]
-                """为DQN训练做准备"""
-                dqn_now_state = router_now_sign * 4 + preprocessing[router_now_sign][1]
-                dqn_next_state = router_next_sign * 4 + preprocessing[router_next_sign][1]
-                dqn_now_reword = preprocessing[router_now_sign][0] + preprocessing[router_next_sign][0]
-                self.remember(dqn_now_state, dqn_next_state, dqn_now_reword, dqn_next_state, False)
                 link = (router_now_sign, router_next_sign)
                 if link not in self.links.keys():
                     link = (router_next_sign, router_now_sign)
@@ -68,6 +64,9 @@ class DqnNetworkAgent(Net, DQN):
         for link in self.links.values():
             data = link.pop_data()
             if data is not None:
-                is_success = self.routers[data.shortest_path[data.count]].put_receive_queue(data)
-                if is_success:
+                is_success_or_over = self.routers[data.shortest_path[data.count]].put_receive_queue(data,
+                old_state=data.shortest_path[data.count - 1])
+                if is_success_or_over[0]:
                     self.success_data_number += 1
+                if is_success_or_over[1]:
+                    self.packet_for_record.add(data)

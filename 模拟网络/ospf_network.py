@@ -84,6 +84,7 @@ class Ospf(Net):
         for link in self.links.values():
             data = link.pop_data()
             if data is not None:
-                is_success = self.routers[data.shortest_path[1]].put_receive_queue(data)
-                if is_success:
+                is_success_or_over = self.routers[data.shortest_path[1]].put_receive_queue(data,
+                old_state=data.shortest_path[data.count - 1])
+                if is_success_or_over[0]:
                     self.success_data_number += 1

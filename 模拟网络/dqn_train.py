@@ -3,6 +3,7 @@ import time
 
 import numpy as np
 import tensorflow as tf
+
 from dqn_network import DqnNetworkAgent
 
 _batch_size: int = 64  # 每次训练的数据组的数量。
@@ -10,21 +11,24 @@ _interval_time: float = 0.01  # 数据包发送的间隔时间。
 _is_best = False
 
 if __name__ == '__main__':
-    cache_size: int = 110
+    cache_size: int = 50
+    create_size: int = 10
     logging.basicConfig(filename='log.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     dqn_net_agent = DqnNetworkAgent()
     # average_loss: list = []  # 计算平均丢包率。
     # average_time: list = []  # 计算平均传播时延。
-    # model = tf.keras.models.load_model('model_1.h5')  # 加载模型
+    # model = tf.keras.models.load_model('model_3.h5')  # 加载模型
     # dqn_net_agent.model = model
     start_time: float = time.perf_counter()
     # for step in range(30, 100, 10):
     loss_sets = []
     for episode in range(1000):
+        dqn_net_agent.memory.clear()
+        dqn_net_agent.packet_for_record.clear()
         dqn_net_agent.total_data_number = 0
         dqn_net_agent.success_data_number = 0
-        for i in range(10):
+        for i in range(create_size):
             dqn_net_agent.update_dataset(is_best=_is_best)
             for j in range(cache_size):
                 dqn_net_agent.update_dataset(is_create_data=False, is_best=_is_best)
@@ -35,13 +39,23 @@ if __name__ == '__main__':
                 print(f'第{episode + 1}轮训练**************************************')
                 # print(dqn_net_agent.get_net_state())
                 break
-        dqn_net_agent.replay(128, dqn_net_agent.G)
+        # for data in dqn_net_agent.packet_for_record:
+        #     if not data.logs[-1][-1]:
+        #         print(data.shortest_path, data.logs)
+        for data in dqn_net_agent.packet_for_record:
+            for log in data.logs:
+                dqn_net_agent.remember(*log)
+            # print(data.shortest_path, data.logs)
+        dqn_net_agent.replay(_batch_size, dqn_net_agent.G)
         print(
             f'丢包率:{(dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number}')
         loss_sets.append(
             (dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number)
-    dqn_net_agent.model.save('model_2.h5')
-    # print(f'DQN平均丢包率:{np.around(np.average(loss_sets), 4)}')
+        logging.info(
+            f'OSPF：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(loss_sets[-1], 6)}\n'
+            f'数据包发送速率:{dqn_net_agent.data_number},数据包的大小:{dqn_net_agent.data_size}')
+    dqn_net_agent.model.save('model_4.h5')
+    print(f'DQN平均丢包率:{np.around(np.average(loss_sets), 4)}')
     # logging.info(f'RIP：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(np.average(loss_sets), 6)}\n'
     #              f'数据包发送速率:{dqn_net_agent.data_number},数据包的大小:{dqn_net_agent.data_size}')
     print(f'消耗时间:{time.perf_counter() - start_time}')

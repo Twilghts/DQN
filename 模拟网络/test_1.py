@@ -1,5 +1,6 @@
 import random
-import collections
+from collections import deque
+from queue import Queue
 
 import numpy as np
 
@@ -27,9 +28,15 @@ def normal_uniform(u, sigma, n):
 
 print(normal_uniform(1000, 150, 16))
 
-deque = collections.deque(maxlen=100)
 print(all([1, 1, 1, 1, 1, 1]))
 print(any([0, 0, 0, 0]))
 print(7 // 4)
 for step in range(30, 100, 10):
     print(step)
+q_1 = deque(maxlen=10)
+for i in range(15):
+    q_1.append(i)
+minibatch = random.sample(q_1, 3)
+print(minibatch)
+print(q_1)
+

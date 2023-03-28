@@ -1,4 +1,4 @@
-import collections
+from queue import Queue
 import random
 
 import gym
@@ -23,7 +23,7 @@ class DQN:
     def __init__(self, state_size, action_size):
         self.state_size = state_size
         self.action_size = action_size
-        self.memory = collections.deque(maxlen=2000)
+        self.memory = Queue(maxsize=10000)
         self.gamma = 0.95  # discount rate
         self.epsilon = 1.0  # exploration rate
         self.epsilon_min = 0.01
