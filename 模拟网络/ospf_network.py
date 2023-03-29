@@ -20,14 +20,14 @@ class Ospf(Net):
         modificate_edges: set = set()  # 统计所有被修改过的边。
         for router in self.routers.values():
             """最低级别繁忙。"""
-            if 0.45 < router.cache / router.datasize <= 0.66:
+            if 0.5 < router.cache / router.datasize <= 0.65:
                 """获取直接与该节点相接的链路。"""
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
                     self.dynamic_graph[edge[0]][edge[1]]['weight'] = 1500
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
-            elif 0.66 < router.cache / router.datasize <= 0.9:
+            elif 0.65 < router.cache / router.datasize <= 0.85:
                 """次高级别繁忙"""
                 """获取直接与该节点相接的链路。"""
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
@@ -35,7 +35,7 @@ class Ospf(Net):
                 for edge in edges:
                     self.dynamic_graph[edge[0]][edge[1]]['weight'] = 1750
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
-            elif router.cache / router.datasize > 0.9:
+            elif router.cache / router.datasize > 0.85:
                 """最高级别繁忙"""
                 """获取直接与该节点相接的链路。"""
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
@@ -56,7 +56,7 @@ class Ospf(Net):
 
     def update_dataset(self, is_create_data=True):
         if is_create_data:
-            # data_number = random.randint(self.data_number_min, self.data_number_max)
+            data_number = random.randint(self.data_number_min, self.data_number_max)
             self.data_set: set = {Data(x, y, size=self.data_size) for x, y
                                   in
                                   zip(numpy.random.choice(self.G.nodes, self.data_number),
@@ -88,3 +88,4 @@ class Ospf(Net):
                 old_state=data.shortest_path[data.count - 1])
                 if is_success_or_over[0]:
                     self.success_data_number += 1
+                    self.packet_for_record.add(data)

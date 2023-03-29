@@ -6,24 +6,27 @@ import tensorflow as tf
 
 from dqn_network import DqnNetworkAgent
 
-_batch_size: int = 64  # 每次训练的数据组的数量。
+_batch_size: int = 256  # 每次训练的数据组的数量。
 _interval_time: float = 0.01  # 数据包发送的间隔时间。
-_is_best = False
+_is_best = True
 
 if __name__ == '__main__':
     cache_size: int = 50
     create_size: int = 10
-    logging.basicConfig(filename='log.log', encoding='utf-8', level=logging.INFO,
+    logging.basicConfig(filename='log_for_dqn.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     dqn_net_agent = DqnNetworkAgent()
     # average_loss: list = []  # 计算平均丢包率。
     # average_time: list = []  # 计算平均传播时延。
-    # model = tf.keras.models.load_model('model_3.h5')  # 加载模型
-    # dqn_net_agent.model = model
+    model = tf.keras.models.load_model('model_4.h5')  # 加载模型
+    dqn_net_agent.model = model
     start_time: float = time.perf_counter()
     # for step in range(30, 100, 10):
+    delay_set = []
+    delay_sets = []
     loss_sets = []
-    for episode in range(1000):
+    for episode in range(5):
+        delay_set.clear()
         dqn_net_agent.memory.clear()
         dqn_net_agent.packet_for_record.clear()
         dqn_net_agent.total_data_number = 0
@@ -39,26 +42,35 @@ if __name__ == '__main__':
                 print(f'第{episode + 1}轮训练**************************************')
                 # print(dqn_net_agent.get_net_state())
                 break
+        for data in dqn_net_agent.packet_for_record:
+            for record in data.logs:
+                delay_set.append(record[-3])
+        delay_sets.append(-(sum(delay_set) / dqn_net_agent.total_data_number))  # 统计单次模拟的时延
         # for data in dqn_net_agent.packet_for_record:
         #     if not data.logs[-1][-1]:
         #         print(data.shortest_path, data.logs)
-        for data in dqn_net_agent.packet_for_record:
-            for log in data.logs:
-                dqn_net_agent.remember(*log)
+        # for data in dqn_net_agent.packet_for_train:
+        #     for log in data.logs:
+        #         dqn_net_agent.remember(*log)
             # print(data.shortest_path, data.logs)
-        dqn_net_agent.replay(_batch_size, dqn_net_agent.G)
+        # dqn_net_agent.replay(_batch_size, dqn_net_agent.G)
+        print(f'时延:{delay_sets[-1]}')
         print(
             f'丢包率:{(dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number}')
         loss_sets.append(
             (dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number)
-        logging.info(
-            f'OSPF：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(loss_sets[-1], 6)}\n'
-            f'数据包发送速率:{dqn_net_agent.data_number},数据包的大小:{dqn_net_agent.data_size}')
-    dqn_net_agent.model.save('model_4.h5')
-    print(f'DQN平均丢包率:{np.around(np.average(loss_sets), 4)}')
+        # logging.info(
+        #     f'DQN：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(loss_sets[-1], 6)}\n'
+        #     f'数据包发送总数:{dqn_net_agent.total_data_number},数据包的大小:{dqn_net_agent.data_size}')
+    # dqn_net_agent.model.save('model_4.h5')
+    print(f'DQN平均丢包率:{np.around(np.average(loss_sets), 4)},平均时延:{np.average(delay_sets)}')
     # logging.info(f'RIP：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(np.average(loss_sets), 6)}\n'
     #              f'数据包发送速率:{dqn_net_agent.data_number},数据包的大小:{dqn_net_agent.data_size}')
     print(f'消耗时间:{time.perf_counter() - start_time}')
+    logging.info(
+        f'DQN：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(np.average(loss_sets), 4)}\n'
+        f'数据包发送总数:{dqn_net_agent.data_number},数据包的大小:{dqn_net_agent.data_size},'
+        f'平均时延:{np.average(delay_sets)}')
 # """训练模型的全过程。"""
 # for i in range(1000):
 #     print(f'第{i + 1}次记录并训练数据!')
@@ -93,9 +105,9 @@ if __name__ == '__main__':
 #     gross: int = 0  # 数据包总量
 #     failure: int = 0  # 失败的数据包数量
 #     for logs in dqn_net_agent.logs.values():
-#         for log in logs[:-2]:
-#             if len(log) == 5:
-#                 dqn_net_agent.remember(*log)
+#         for log_for_dqn.log in logs[:-2]:
+#             if len(log_for_dqn.log) == 5:
+#                 dqn_net_agent.remember(*log_for_dqn.log)
 #         gross += 1
 #         if not logs[-1]:
 #             failure += 1

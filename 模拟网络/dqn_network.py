@@ -13,7 +13,7 @@ class DqnNetworkAgent(Net, DQN):
         Net.__init__(self)
         DQN.__init__(self, state_size=1, action_size=len(self.G.nodes) * 4)
         self._k: int = 3  # k最短路径算法中路径的条数
-        self.packet_for_record = set()
+        self.packet_for_train = set()
 
     def k_shortest_paths_by_dqn(self, data):
         return k_shortest_paths(self.G, data.get_start(), data.get_goal(), self._k)
@@ -23,8 +23,8 @@ class DqnNetworkAgent(Net, DQN):
             data_number = random.randint(self.data_number_min, self.data_number_max)
             self.data_set: set = {Data(x, y, size=self.data_size) for x, y
                                   in
-                                  zip(numpy.random.choice(self.G.nodes, data_number),
-                                      numpy.random.choice(self.G.nodes, data_number)) if x != y}
+                                  zip(numpy.random.choice(self.G.nodes, self.data_number),
+                                      numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
             while len(self.data_set) < self.data_number:
                 pair: tuple = random.sample(self.G.nodes, 2)
                 self.data_set.add(Data(pair[0], pair[1], size=self.data_size))
@@ -68,5 +68,6 @@ class DqnNetworkAgent(Net, DQN):
                 old_state=data.shortest_path[data.count - 1])
                 if is_success_or_over[0]:
                     self.success_data_number += 1
-                if is_success_or_over[1]:
                     self.packet_for_record.add(data)
+                if is_success_or_over[1]:
+                    self.packet_for_train.add(data)

@@ -1,3 +1,4 @@
+import random
 import time
 
 import matplotlib.pyplot as plt
@@ -13,7 +14,7 @@ class Net:
         self.success_data_number = 0
         self.data_number_min = 300
         self.data_number_max = 700
-        self.data_number = 500
+        self.data_number = 600
         self.G = nx.read_graphml("graph.graphml")
         """读取出来的图的节点是字符串类型的，离谱！要更改节点的名字"""
         relabel_table = {
@@ -41,6 +42,7 @@ class Net:
             data: [] for data in self.data_set
         }
         self.time: float = 0  # 网络开始传输信息时的时间戳，传输过程中用于计算吞吐量，传输结束后用于计算总传播时间。
+        self.packet_for_record = set()
 
     """返回路由器组的网络状态，格式为以路由器序号为key，r1的缓存/r1的容量为value"""
 
