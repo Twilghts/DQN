@@ -11,7 +11,7 @@ _interval_time: float = 0.01  # 数据包发送的间隔时间。
 _is_best = True
 
 if __name__ == '__main__':
-    cache_size: int = 50
+    cache_size: int = 10
     create_size: int = 10
     logging.basicConfig(filename='log_for_dqn.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
@@ -45,7 +45,6 @@ if __name__ == '__main__':
         for data in dqn_net_agent.packet_for_record:
             for record in data.logs:
                 delay_set.append(record[-3])
-        delay_sets.append(-(sum(delay_set) / dqn_net_agent.total_data_number))  # 统计单次模拟的时延
         # for data in dqn_net_agent.packet_for_record:
         #     if not data.logs[-1][-1]:
         #         print(data.shortest_path, data.logs)
@@ -54,11 +53,12 @@ if __name__ == '__main__':
         #         dqn_net_agent.remember(*log)
             # print(data.shortest_path, data.logs)
         # dqn_net_agent.replay(_batch_size, dqn_net_agent.G)
-        print(f'时延:{delay_sets[-1]}')
         print(
             f'丢包率:{(dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number}')
         loss_sets.append(
             (dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number)
+        delay_sets.append(-(sum(delay_set) * (1 + loss_sets[-1] * 3) / dqn_net_agent.total_data_number))  # 统计单次模拟的时延
+        print(f'时延:{delay_sets[-1]}')
         # logging.info(
         #     f'DQN：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(loss_sets[-1], 6)}\n'
         #     f'数据包发送总数:{dqn_net_agent.total_data_number},数据包的大小:{dqn_net_agent.data_size}')

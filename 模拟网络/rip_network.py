@@ -32,7 +32,7 @@ class Rip(Net):
             for data in self.data_set:
                 if self.routers[data.get_start()].datasize - self.routers[data.get_start()].cache >= data.size:
                     data.shortest_path = nx.dijkstra_path(self.G, data.get_start(), data.get_goal())
-                    self.routers[data.shortest_path[data.count]].put_receive_queue(data)
+                    self.routers[data.shortest_path[data.count]].put_receive_queue(data, is_rip=True)
                     self.total_data_number += 1
         """转发每个路由器中队首的数据包，放入链路中"""
         for router in self.routers.values():
@@ -48,7 +48,7 @@ class Rip(Net):
             data = link.pop_data()
             if data is not None:
                 is_success_or_over = self.routers[data.shortest_path[data.count]].put_receive_queue(data,
-                old_state=data.shortest_path[data.count - 1])
+                old_state=data.shortest_path[data.count - 1], is_rip=True)
                 if is_success_or_over[0]:
                     self.success_data_number += 1
                     self.packet_for_record.add(data)

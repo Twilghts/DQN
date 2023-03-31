@@ -6,7 +6,7 @@ import numpy as np
 from rip_network import Rip
 
 if __name__ == '__main__':
-    cache_size: int = 50
+    cache_size: int = 100
     logging.basicConfig(filename='log_for_rip.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     rip_network = Rip()
@@ -34,14 +34,14 @@ if __name__ == '__main__':
         for data in rip_network.packet_for_record:
             for record in data.logs:
                 delay_set.append(record[-3])
-        delay_sets.append(-(sum(delay_set) / rip_network.total_data_number))  # 统计单次模拟的时延
         print(f'消耗时间:{time.perf_counter() - start_time}')
-        print(f'时延:{delay_sets[-1]}')
         print(
             f'丢包率:{(rip_network.total_data_number - rip_network.success_data_number) / rip_network.total_data_number}')
         loss_sets.append(
             (rip_network.total_data_number - rip_network.success_data_number) / rip_network.total_data_number)
-    print(f'RIP的平均丢包率:{np.around(np.average(loss_sets), 4)},平均时延:{np.average(delay_sets)}')
+        delay_sets.append(-(sum(delay_set) * (1 + loss_sets[-1] * 3) / rip_network.total_data_number))  # 统计单次模拟的时延
+        print(f'时延:{delay_sets[-1]}')
+    print(f'RIP的平均丢包率:{np.around(np.average(loss_sets), 6)},平均时延:{np.average(delay_sets)}')
     logging.info(f'RIP：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(np.average(loss_sets), 6)}\n'
                  f'数据包发送速率:{rip_network.data_number},数据包的大小:{rip_network.data_size}'
                  f'平均时延:{np.average(delay_sets)}')

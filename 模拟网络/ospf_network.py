@@ -20,28 +20,28 @@ class Ospf(Net):
         modificate_edges: set = set()  # 统计所有被修改过的边。
         for router in self.routers.values():
             """最低级别繁忙。"""
-            if 0.5 < router.cache / router.datasize <= 0.65:
+            if 0.45 < router.cache / router.datasize <= 0.60:
                 """获取直接与该节点相接的链路。"""
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
                     self.dynamic_graph[edge[0]][edge[1]]['weight'] = 1500
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
-            elif 0.65 < router.cache / router.datasize <= 0.85:
+            elif 0.60 < router.cache / router.datasize <= 0.75:
                 """次高级别繁忙"""
                 """获取直接与该节点相接的链路。"""
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
-                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 1750
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 2500
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
-            elif router.cache / router.datasize > 0.85:
+            elif router.cache / router.datasize > 0.75:
                 """最高级别繁忙"""
                 """获取直接与该节点相接的链路。"""
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
-                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 2500
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 4000
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
         """获取所有未经修改的边。"""
         dismodificate_edges: set = {(u, v) for u, v in self.dynamic_graph.edges if (u, v) not in modificate_edges}
