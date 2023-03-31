@@ -43,7 +43,7 @@ class Data:
 
     def loging(self, number, old_state, new_state, is_loss=False, is_done=False, is_rip=False):
         if is_loss:
-            self.logs.append((old_state, new_state, -1000, new_state, is_done))
+            self.logs.append((old_state, new_state, -100, new_state, is_done))
         elif is_rip:
             self.logs.append((old_state, new_state, - (0.15 + (number + 1) * 0.01), new_state, is_done))
         else:

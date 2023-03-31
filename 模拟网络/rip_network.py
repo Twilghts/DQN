@@ -51,4 +51,5 @@ class Rip(Net):
                 old_state=data.shortest_path[data.count - 1], is_rip=True)
                 if is_success_or_over[0]:
                     self.success_data_number += 1
+                if is_success_or_over[1]:
                     self.packet_for_record.add(data)

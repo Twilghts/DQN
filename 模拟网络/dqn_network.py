@@ -68,6 +68,6 @@ class DqnNetworkAgent(Net, DQN):
                 old_state=data.shortest_path[data.count - 1])
                 if is_success_or_over[0]:
                     self.success_data_number += 1
-                    self.packet_for_record.add(data)
                 if is_success_or_over[1]:
                     self.packet_for_train.add(data)
+                    self.packet_for_record.add(data)
