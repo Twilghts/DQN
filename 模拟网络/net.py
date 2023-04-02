@@ -1,4 +1,3 @@
-import random
 import time
 
 import matplotlib.pyplot as plt
@@ -14,14 +13,15 @@ class Net:
         self.success_data_number = 0
         self.data_number_min = 200
         self.data_number_max = 600
-        self.data_number = 400
+        self.data_number = 220
         self.G = nx.read_graphml("graph.graphml")
         """读取出来的图的节点是字符串类型的，离谱！要更改节点的名字"""
         relabel_table = {
             number: int(number) for number in self.G.nodes
         }
         self.G = nx.relabel_nodes(self.G, relabel_table)
-        self.router_capacities = [919, 753, 883, 911, 1367, 552, 552, 1075, 1087, 1057, 633, 1141, 1080, 749, 1405, 856]
+        self.router_capacities = [1878, 1491, 1531, 1925, 1162, 1383, 1858, 1390, 1683, 1928, 1753, 1897, 1520, 1533,
+                                  1083, 1341]
         """路由器组 为字典，键为路由器的编号，值为所对应的路由器,设置路由器内部可存储的数据容量。"""
         self.routers: dict = {
             number: Router(number, datasize=self.router_capacities[number]) for number in self.G.nodes
@@ -51,7 +51,9 @@ class Net:
             router.sign: (router.cache / router.datasize, self.calculate_loss(router.sign)) for router in
             self.routers.values()
         }
+
     """专门计算丢包率的函数，之前没想到数据包数量不够，经过一个路由器的数据包数量会是0"""
+
     def calculate_loss(self, number):
         router = self.routers[number]
         if router.total != 0:

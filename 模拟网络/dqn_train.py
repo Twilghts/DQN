@@ -7,19 +7,18 @@ import tensorflow as tf
 from dqn_network import DqnNetworkAgent
 
 _batch_size: int = 256  # 每次训练的数据组的数量。
-_interval_time: float = 0.01  # 数据包发送的间隔时间。
-_is_best = True
+_is_best = False
 
 if __name__ == '__main__':
-    cache_size: int = 40
+    cache_size: int = 7
     create_size: int = 10
     logging.basicConfig(filename='log_for_dqn.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     dqn_net_agent = DqnNetworkAgent()
     # average_loss: list = []  # 计算平均丢包率。
     # average_time: list = []  # 计算平均传播时延。
-    model = tf.keras.models.load_model('model_4.h5')  # 加载模型
-    dqn_net_agent.model = model
+    # model = tf.keras.models.load_model('model_4.h5')  # 加载模型
+    # dqn_net_agent.model = model
     start_time: float = time.perf_counter()
     # for step in range(30, 100, 10):
     delay_set = []  # 丢包率的集合
@@ -27,13 +26,13 @@ if __name__ == '__main__':
     loss_sets = []  # 每次传输的时延的集合
     throughput_set = []  # 每次传输的吞吐量总和
     throughput_capacity = 0  # 单次传输的吞吐量
-    for episode in range(10):
+    for episode in range(1000):
         """每次传输后路由器吞吐量归零"""
-        for router in dqn_net_agent.routers.values():
-            router.total = 0
-            router.failure = 0
-        throughput_capacity = 0
-        delay_set.clear()
+        # for router in dqn_net_agent.routers.values():
+        #     router.total = 0
+        #     router.failure = 0
+        # throughput_capacity = 0
+        # delay_set.clear()
         dqn_net_agent.memory.clear()
         dqn_net_agent.total_data_number = 0
         dqn_net_agent.success_data_number = 0
@@ -46,19 +45,16 @@ if __name__ == '__main__':
             dqn_net_agent.update_dataset(is_create_data=False, is_best=_is_best)
             state = [item[0] for item in dqn_net_agent.get_net_state().values()]
             if not any(state):  # 所有路由器全为空
-                print(f'第{episode + 1}轮测试**************************************')
+                print(f'第{episode + 1}轮训练**************************************')
                 # print(dqn_net_agent.get_net_state())
                 break
         for data in dqn_net_agent.packet_for_record:
             for record in data.logs:
-                if record[-3] != -100:
-                    delay_set.append(record[-3])
-                else:
-                    delay_set.append(-5)
-        """统计单次传输中的吞吐量"""
-        for router in dqn_net_agent.routers.values():
-            throughput_capacity += router.total - router.failure
-        throughput_set.append(-throughput_capacity / sum(delay_set))  # 计算单次传输中的吞吐量
+                dqn_net_agent.remember(*record)
+        # """统计单次传输中的吞吐量"""
+        # for router in dqn_net_agent.routers.values():
+        #     throughput_capacity += router.total - router.failure
+        # throughput_set.append(-throughput_capacity / sum(delay_set))  # 计算单次传输中的吞吐量
         # for data in dqn_net_agent.packet_for_record:
         #     if not data.logs[-1][-1]:
         #         print(data.shortest_path, data.logs)
@@ -66,18 +62,18 @@ if __name__ == '__main__':
         #     for log in data.logs:
         #         dqn_net_agent.remember(*log)
             # print(data.shortest_path, data.logs)
-        # dqn_net_agent.replay(_batch_size, dqn_net_agent.G)
+        dqn_net_agent.replay(_batch_size, dqn_net_agent.G)
         print(
             f'丢包率:{(dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number}')
         loss_sets.append(
             (dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number)
-        delay_sets.append(-(sum(delay_set) * (1 + loss_sets[-1] * 3) / dqn_net_agent.total_data_number))  # 统计单次模拟的时延
-        print(f'时延:{delay_sets[-1]}')
-        print(f'吞吐量:{throughput_set[-1]}\n')
+        # delay_sets.append(-(sum(delay_set) * (1 + loss_sets[-1] * 3) / dqn_net_agent.total_data_number))  # 统计单次模拟的时延
+        # print(f'时延:{delay_sets[-1]}')
+        # print(f'吞吐量:{throughput_set[-1]}\n')
         # logging.info(
         #     f'DQN：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(loss_sets[-1], 6)}\n'
         #     f'数据包发送总数:{dqn_net_agent.total_data_number},数据包的大小:{dqn_net_agent.data_size}')
-    # dqn_net_agent.model.save('model_4.h5')
+    dqn_net_agent.model.save('model_5.h5')
     print(f'DQN平均丢包率:{np.around(np.average(loss_sets), 4)},平均时延:{np.average(delay_sets)},'
           f'平均吞吐量:{np.average(throughput_set)}')
     # logging.info(f'RIP：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(np.average(loss_sets), 6)}\n'

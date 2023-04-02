@@ -11,7 +11,7 @@ from 模拟网络.利用network实现k最短路径算法 import k_shortest_paths
 class DqnNetworkAgent(Net, DQN):
     def __init__(self):
         Net.__init__(self)
-        DQN.__init__(self, state_size=1, action_size=self.G.nodes)
+        DQN.__init__(self, state_size=1, action_size=len(self.G.nodes))
         self._k: int = 3  # k最短路径算法中路径的条数
         self.packet_for_train = set()
 

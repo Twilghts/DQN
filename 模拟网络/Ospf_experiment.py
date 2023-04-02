@@ -6,7 +6,7 @@ import numpy as np
 from ospf_network import Ospf
 
 if __name__ == '__main__':
-    cache_size: int = 40
+    cache_size: int = 7
     logging.basicConfig(filename='log_for_ospf.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     ospf_network = Ospf()

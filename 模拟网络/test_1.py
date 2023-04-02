@@ -26,7 +26,7 @@ def normal_uniform(u, sigma, n):
     return uniform_numbers
 
 
-print(normal_uniform(1000, 150, 16))
+print(normal_uniform(1500, 166, 16))
 
 print(all([1, 1, 1, 1, 1, 1]))
 print(any([0, 0, 0, 0]))
