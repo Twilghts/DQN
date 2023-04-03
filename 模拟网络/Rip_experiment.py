@@ -6,7 +6,7 @@ import numpy as np
 from rip_network import Rip
 
 if __name__ == '__main__':
-    cache_size: int = 7
+    cache_size: int = 13
     logging.basicConfig(filename='log_for_rip.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     rip_network = Rip()
