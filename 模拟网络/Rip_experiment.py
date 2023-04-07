@@ -6,7 +6,7 @@ import numpy as np
 from rip_network import Rip
 
 if __name__ == '__main__':
-    cache_size: int = 13
+    cache_size: int = 10
     logging.basicConfig(filename='log_for_rip.log', encoding='utf-8', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     rip_network = Rip()
@@ -21,6 +21,9 @@ if __name__ == '__main__':
         for router in rip_network.routers.values():
             router.total = 0
             router.failure = 0
+        """每次传输后链路吞吐量归零"""
+        for link in rip_network.links.values():
+            link.throughput = 0
         throughput_capacity = 0
         delay_set.clear()
         rip_network.total_data_number = 0
@@ -42,12 +45,13 @@ if __name__ == '__main__':
             for record in data.logs:
                 if record[-3] != -100:
                     delay_set.append(record[-3])
-                else:
-                    delay_set.append(-5)
-        """统计单次传输中的吞吐量"""
-        for router in rip_network.routers.values():
-            throughput_capacity += router.total - router.failure
-        throughput_set.append(-throughput_capacity / sum(delay_set))  # 计算单次传输中的吞吐量
+                # else:
+                #     delay_set.append(-5)
+        # """统计单次传输中的吞吐量"""
+        # for router in rip_network.routers.values():
+        #     throughput_capacity += router.total - router.failure
+        throughput_capacity += np.average([link.throughput for link in rip_network.links.values()])
+        throughput_set.append(throughput_capacity)  # 计算单次传输中的吞吐量
         print(f'消耗时间:{time.perf_counter() - start_time}')
         print(
             f'丢包率:{(rip_network.total_data_number - rip_network.success_data_number) / rip_network.total_data_number}')

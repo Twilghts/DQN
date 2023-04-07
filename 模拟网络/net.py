@@ -13,7 +13,7 @@ class Net:
         self.success_data_number = 0
         self.data_number_min = 200
         self.data_number_max = 600
-        self.data_number = 250
+        self.data_number = 270
         self.G = nx.read_graphml("graph.graphml")
         """读取出来的图的节点是字符串类型的，离谱！要更改节点的名字"""
         relabel_table = {
@@ -31,7 +31,7 @@ class Net:
             self.G[u][v]['weight']: int = (self.routers[u].datasize + self.routers[v].datasize) // 2
         """网络连接组 为字典，键为起始路由器和终止路由器的元组，值为相对应的网络链接。"""
         self.links: dict = {
-            (start, target): Link((start, target), delay=0.001) for start, target in self.G.edges
+            (start, target): Link((start, target)) for start, target in self.G.edges
         }
         """数据包集合，一共有指定数目个数据包,每个数据包的大小都不同。"""
         self.data_size: int = 10  # 数据包的大小

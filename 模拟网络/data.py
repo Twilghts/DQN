@@ -1,7 +1,3 @@
-import copy
-import time
-
-
 class Data:
     def __init__(self, start, target, size=600, delay=0):
         self._start: int = start  # 起始路由器标号
@@ -24,12 +20,6 @@ class Data:
     def __len__(self):
         return self.size
 
-    def get_state(self):
-        return self.state
-
-    def get_size(self):
-        return self.size
-
     def get_goal(self):
         return self._target
 
@@ -45,6 +35,6 @@ class Data:
         if is_loss:
             self.logs.append((old_state, new_state, -100, new_state, is_done))
         elif is_rip:
-            self.logs.append((old_state, new_state, - (0.15 + (number + 1) * 0.01), new_state, is_done))
+            self.logs.append((old_state, new_state, - (0.05 + (number + 1) * 0.01), new_state, is_done))
         else:
             self.logs.append((old_state, new_state, - (0.05 + (number + 1) * 0.01), new_state, is_done))
