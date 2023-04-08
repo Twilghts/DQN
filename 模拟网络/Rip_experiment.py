@@ -41,22 +41,24 @@ if __name__ == '__main__':
         # for data in rip_network.data_set:
         #     if len(data.logs) != 0 and data.logs[-1][-3] == -5:
         #         print(data.shortest_path, data.logs)
+        loss_sets.append(
+            (rip_network.total_data_number - rip_network.success_data_number) / rip_network.total_data_number)
         for data in rip_network.packet_for_record:
             for record in data.logs:
                 if record[-3] != -100:
                     delay_set.append(record[-3])
                 # else:
                 #     delay_set.append(-5)
+        print(f'本次传输的数据包总量:{rip_network.total_data_number}')
         # """统计单次传输中的吞吐量"""
         # for router in rip_network.routers.values():
         #     throughput_capacity += router.total - router.failure
-        throughput_capacity += np.average([link.throughput for link in rip_network.links.values()])
+        throughput_capacity += np.average([link.throughput for link in rip_network.links.values()]) * (
+                    1 - loss_sets[-1])
         throughput_set.append(throughput_capacity)  # 计算单次传输中的吞吐量
         print(f'消耗时间:{time.perf_counter() - start_time}')
         print(
             f'丢包率:{(rip_network.total_data_number - rip_network.success_data_number) / rip_network.total_data_number}')
-        loss_sets.append(
-            (rip_network.total_data_number - rip_network.success_data_number) / rip_network.total_data_number)
         delay_sets.append(-(sum(delay_set) * (1 + loss_sets[-1] * 3) / rip_network.total_data_number))  # 统计单次模拟的时延
         print(f'时延:{delay_sets[-1]}')
         print(f'吞吐量:{throughput_set[-1]}\n')

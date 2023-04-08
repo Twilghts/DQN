@@ -42,22 +42,24 @@ if __name__ == '__main__':
         # for data in ospf_network.data_set:
         #     if len(data.logs) != 0 and not data.logs[-1][-1]:
         #         print(data.shortest_path, data.logs)
+        loss_sets.append(
+            (ospf_network.total_data_number - ospf_network.success_data_number) / ospf_network.total_data_number)
         for data in ospf_network.packet_for_record:
             for record in data.logs:
                 if record[-3] != -100:
                     delay_set.append(record[-3])
                 # else:
                 #     delay_set.append(-5)
+        print(f'本次传输的数据包总量:{ospf_network.total_data_number}')
         # """以路由器为基础计算吞吐量"""
         # for router in ospf_network.routers.values():
         #     throughput_capacity += router.total - router.failure
-        throughput_capacity += np.average([link.throughput for link in ospf_network.links.values()])
+        throughput_capacity += np.average([link.throughput for link in ospf_network.links.values()]) * (
+                1 - loss_sets[-1])
         throughput_set.append(throughput_capacity)  # 计算单次传输中的吞吐量
         print(f'消耗时间:{time.perf_counter() - start_time}')
         print(
             f'丢包率:{(ospf_network.total_data_number - ospf_network.success_data_number) / ospf_network.total_data_number}')
-        loss_sets.append(
-            (ospf_network.total_data_number - ospf_network.success_data_number) / ospf_network.total_data_number)
         delay_sets.append(-(sum(delay_set) * (1 + loss_sets[-1] * 3) / ospf_network.total_data_number))  # 统计单次模拟的时延
         print(f'时延:{delay_sets[-1]}')
         print(f'吞吐量:{throughput_set[-1]}\n')

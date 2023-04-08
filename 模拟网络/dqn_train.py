@@ -26,7 +26,7 @@ if __name__ == '__main__':
     loss_sets = []  # 每次传输的时延的集合
     throughput_set = []  # 每次传输的吞吐量总和
     throughput_capacity = 0  # 单次传输的吞吐量
-    for episode in range(15):
+    for episode in range(10):
         """每次传输后路由器吞吐量归零"""
         for router in dqn_net_agent.routers.values():
             router.total = 0
@@ -57,10 +57,14 @@ if __name__ == '__main__':
                     delay_set.append(record[-3])
                 # else:
                 #     delay_set.append(-5)
+        print(f'本次传输的数据包总量:{dqn_net_agent.total_data_number}')
         # """统计单次传输中的吞吐量"""
         # for router in dqn_net_agent.routers.values():
         #     throughput_capacity += router.total - router.failure
-        throughput_capacity += np.average([link.throughput for link in dqn_net_agent.links.values()])
+        loss_sets.append(
+            (dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number)
+        throughput_capacity += np.average([link.throughput for link in dqn_net_agent.links.values()]) * (
+                    1 - loss_sets[-1])
         throughput_set.append(throughput_capacity)  # 计算单次传输中的吞吐量
         # for data in dqn_net_agent.packet_for_record:
         #     if not data.logs[-1][-1]:
@@ -72,8 +76,6 @@ if __name__ == '__main__':
         # dqn_net_agent.replay(_batch_size, dqn_net_agent.G)
         print(
             f'丢包率:{(dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number}')
-        loss_sets.append(
-            (dqn_net_agent.total_data_number - dqn_net_agent.success_data_number) / dqn_net_agent.total_data_number)
         delay_sets.append(-(sum(delay_set) * (1 + loss_sets[-1] * 3) / dqn_net_agent.total_data_number))  # 统计单次模拟的时延
         print(f'时延:{delay_sets[-1]}')
         print(f'吞吐量:{throughput_set[-1]}\n')

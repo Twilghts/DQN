@@ -13,7 +13,7 @@ class Net:
         self.success_data_number = 0
         self.data_number_min = 200
         self.data_number_max = 600
-        self.data_number = 270
+        self.data_number = 120
         self.G = nx.read_graphml("graph.graphml")
         """读取出来的图的节点是字符串类型的，离谱！要更改节点的名字"""
         relabel_table = {
