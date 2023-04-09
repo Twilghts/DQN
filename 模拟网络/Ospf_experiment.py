@@ -14,8 +14,9 @@ if __name__ == '__main__':
     loss_sets = []  # 丢包率的集合
     delay_set = []  # 单次传输的时延
     delay_sets = []  # 每次传输的时延的集合
-    throughput_set = []  # 每次传输的吞吐量总和
+    throughput_sets = []  # 每次传输的吞吐量总和
     throughput_capacity = 0  # 单次传输的吞吐量
+    throughput_set = []  # 计算单次传输中的吞吐量采样点
     for episode in range(25):
         """每次传输后路由器吞吐量归零"""
         for router in ospf_network.routers.values():
@@ -25,17 +26,20 @@ if __name__ == '__main__':
         for link in ospf_network.links.values():
             link.throughput = 0
         throughput_capacity = 0
+        throughput_set.clear()
         delay_set.clear()
         ospf_network.total_data_number = 0
         ospf_network.success_data_number = 0
         ospf_network.packet_for_record.clear()
         for i in range(10):
             ospf_network.update_dataset()
+            throughput_set.append(min(ospf_network.get_net_state().values()))
             for j in range(cache_size):
                 ospf_network.update_dataset(is_create_data=False)
+                throughput_set.append(min(ospf_network.get_net_state().values()))
         while True:
             ospf_network.update_dataset(is_create_data=False)
-            state = [item[0] for item in ospf_network.get_net_state().values()]
+            state = [item for item in ospf_network.get_net_state().values()]
             if not any(state):  # 所有路由器全为空
                 ospf_network.retry_graph()
                 break
@@ -54,17 +58,17 @@ if __name__ == '__main__':
         # """以路由器为基础计算吞吐量"""
         # for router in ospf_network.routers.values():
         #     throughput_capacity += router.total - router.failure
-        throughput_capacity += np.average([link.throughput for link in ospf_network.links.values()]) * (
-                1 - loss_sets[-1])
-        throughput_set.append(throughput_capacity)  # 计算单次传输中的吞吐量
+        # throughput_capacity += np.average([link.throughput for link in ospf_network.links.values()]) * (
+        #         1 - loss_sets[-1])
+        throughput_sets.append(np.average(throughput_set))  # 计算单次传输中的吞吐量
         print(f'消耗时间:{time.perf_counter() - start_time}')
         print(
             f'丢包率:{(ospf_network.total_data_number - ospf_network.success_data_number) / ospf_network.total_data_number}')
         delay_sets.append(-(sum(delay_set) * (1 + loss_sets[-1] * 3) / ospf_network.total_data_number))  # 统计单次模拟的时延
         print(f'时延:{delay_sets[-1]}')
-        print(f'吞吐量:{throughput_set[-1]}\n')
+        print(f'吞吐量:{throughput_sets[-1]}\n')
     print(f'OSPF的平均丢包率:{np.around(np.average(loss_sets), 6)},平均时延:{np.average(delay_sets)},'
-          f'平均吞吐量:{np.average(throughput_set)}')
+          f'平均吞吐量:{np.average(throughput_sets)}')
     logging.info(f'OSPF：每创建一次数据包后单纯发送的次数:{cache_size},丢包率:{np.around(np.average(loss_sets), 6)}\n'
-                 f'数据包发送速率:{ospf_network.data_number},数据包的大小:{ospf_network.data_size}'
-                 f'平均时延:{np.average(delay_sets)},平均吞吐量:{np.average(throughput_set)}')
+                 f'数据包发送速率:{ospf_network.data_number}Gbps,数据包的大小:{ospf_network.data_size}Kb'
+                 f'平均时延:{np.average(delay_sets)}ms,平均吞吐量:{np.average(throughput_sets)}Gbps')
