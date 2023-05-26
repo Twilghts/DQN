@@ -1,8 +1,10 @@
 import copy
-import time
+import random
 
 import networkx as nx
+import numpy
 
+from package import Data
 from net import Net
 
 
@@ -12,17 +14,34 @@ class Ospf(Net):
         self.dynamic_graph = copy.deepcopy(self.G)  # 创建一个副本图，用于体现Ospf的动态性。
 
     """在传输信息的同时对网络进行动态更新"""
+
     def update_graph(self):
-        """对每一个路由器进行访问，如果它的可用数据量小于一半，就对图中的边相应的权值进行修改，如果它的可用数据量正常，则将边的权值恢复成原图的权值"""
+        """对每一个路由器进行访问，对连接不同繁忙级别的路由器的链路设置不同的权值"""
         modificate_edges: set = set()  # 统计所有被修改过的边。
         for router in self.routers.values():
-            """可用数据量不够，进行修改。"""
-            if router.get_receive_size() < router.datasize * 0.3:
+            """最低级别繁忙。"""
+            if 0.45 < router.cache / router.datasize <= 0.60:
                 """获取直接与该节点相接的链路。"""
                 edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
                 """修改每一条链路的权值。edge为元组"""
                 for edge in edges:
-                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 100
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 1500
+                modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
+            elif 0.60 < router.cache / router.datasize <= 0.75:
+                """次高级别繁忙"""
+                """获取直接与该节点相接的链路。"""
+                edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
+                """修改每一条链路的权值。edge为元组"""
+                for edge in edges:
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 2500
+                modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
+            elif router.cache / router.datasize > 0.75:
+                """最高级别繁忙"""
+                """获取直接与该节点相接的链路。"""
+                edges: set = {(u, v) for u, v in self.dynamic_graph.edges if u == router.sign or v == router.sign}
+                """修改每一条链路的权值。edge为元组"""
+                for edge in edges:
+                    self.dynamic_graph[edge[0]][edge[1]]['weight'] = 4000
                 modificate_edges |= edges  # 两个集合做并集。不会有重复元素。
         """获取所有未经修改的边。"""
         dismodificate_edges: set = {(u, v) for u, v in self.dynamic_graph.edges if (u, v) not in modificate_edges}
@@ -31,74 +50,43 @@ class Ospf(Net):
             self.dynamic_graph[u][v]['weight'] = self.G[u][v]['weight']
 
     """每次结束一整次传输信息时，对图进行全局复原。"""
+
     def retry_graph(self):
         self.dynamic_graph = copy.deepcopy(self.G)
 
-    def send_message(self, data, is_dqn=False, path=None):
-        """动态的计算最佳路径"""
-        state: int = data.get_start()  # 数据包最开始的状态
-        action: int = nx.dijkstra_path(self.dynamic_graph, data.get_start(), data.get_goal())[1]  # 动态的计算数据包所要经过的下一跳路由器。
-        start_time: float = time.perf_counter()
-        """将信息放到第一个路由器的接收队列,如果路由器的可用数据量大于总数据量的一半时执行此操作。"""
-        while True:
-            if self.routers[data.get_start()].get_receive_size() >= self.routers[data.get_start()].datasize * 0.5:
-                self.routers[data.get_start()].put_receive_queue(data)  # 信息进入等待队列
-                self.calculate_handling_capacity(data.get_start(), self.router_power)  # 更新路由器的吞吐量(入第一个路由器)
-                time.sleep(len(data) / self.router_power)  # 信息在路由器接收队列的处理时间
-                break
-            else:
-                time.sleep(self.waiting_time)  # 轮询等待时间
-        while True:
-            """当信息不在发送队列时一直轮询"""
-            while True:
-                if len(data) <= self.routers[state].get_send_size():
-                    self.routers[state].from_receive_queue_send_queue(data)  # 信息从接收队列移至发送队列,进行常规记录。
-                    time.sleep(len(data) / self.router_power)  # 信息在路由器发送队列的处理时间
-                    break
-                else:
-                    time.sleep(self.waiting_time)  # 轮询等待时间
-            link_message: tuple = (state, action)  # 确定链路两个节点的前后顺序
-            if (action, state) in self.links.keys():
-                link_message: tuple = (action, state)
-            """当信息不在链路上时一直轮询"""
-            while True:
-                if len(data) <= self.links[link_message].read_data_size():
-                    self.routers[state].pop_send_queue(data)  # 信息从发送队列出队
-                    self.calculate_handling_capacity(state, -self.router_power)  # 更新路由器的吞吐量(出路由器)
-                    self.links[link_message].put_data(data, link_message)  # 信息进入链路中
-                    time.sleep(self.links[link_message].delay)  # 信息在链路上的传递时间
-                    break
-                else:
-                    time.sleep(self.waiting_time)  # 轮询等待时间
-            """此时信息已从链路上传递完成"""
-            self.links[link_message].pop_data(data)  # 信息从链路中出队，不再等待
-            is_loss_package: bool = self.routers[action].put_receive_queue(data)  # 信息从下一个接收队列入队，有丢包风险
-            if is_loss_package:
-                """当数据包未能成功传输时所作的记录"""
-                self.logs[data] = copy.deepcopy(data.logs)
-                self.logs[data].append(round(time.perf_counter() - start_time, 5))  # 统计总共的消耗时间
-                self.logs[data].append(False)
-                break
-            self.calculate_handling_capacity(action, self.router_power)  # 更新路由器的吞吐量(入下一个路由器)
-            time.sleep(len(data) / self.router_power)  # 数据包在下一跳路由器等待队列中的处理时间
-            """当数据包进入目标路由器时，与进入起始路由器时同样进行特殊处理，此时数据包成功传输到目标"""
-            if data.state == (0, data.get_goal()):
-                """信息从最后一个路由器的接收队列进入最后一个路由器的发送队列"""
-                while True:
-                    if len(data) <= self.routers[data.get_goal()].get_send_size():
-                        self.routers[data.get_goal()].from_receive_queue_send_queue(data)  # 信息从接收队列移至发送队列,进行常规记录。
-                        time.sleep(len(data) / self.router_power)  # 信息在路由器发送队列的处理时间
-                        break
-                    else:
-                        time.sleep(self.waiting_time)  # 轮询等待时间
-                self.routers[data.get_goal()].pop_send_queue(data)  # 信息从从最后一个路由器的发送队列出队
-                self.calculate_handling_capacity(data.get_goal(), -self.router_power)  # 更新路由器的吞吐量(出最后一个路由器)
-                """当数据包成功传输时所作的记录"""
-                self.logs[data]: list = copy.deepcopy(data.logs)
-                self.logs[data].append(round(time.perf_counter() - start_time, 5))  # 统计总共的消耗时间,保留五位小数。
-                self.logs[data].append(True)
-                break
-            else:
-                """动态更新数据包下一跳要到达的路由器。"""
-                state: int = action
-                action: int = nx.dijkstra_path(self.dynamic_graph, state, data.get_goal())[1]
+    def update_dataset(self, is_create_data=True):
+        if is_create_data:
+            data_number = random.randint(self.data_number_min, self.data_number_max)
+            self.data_set: set = {Data(x, y, size=self.data_size) for x, y
+                                  in
+                                  zip(numpy.random.choice(self.G.nodes, self.data_number),
+                                      numpy.random.choice(self.G.nodes, self.data_number)) if x != y}
+            while len(self.data_set) < self.data_number:
+                pair: tuple = random.sample(self.G.nodes, 2)
+                self.data_set.add(Data(pair[0], pair[1], size=self.data_size))
+            for data in self.data_set:
+                """当路由器有容量的时候才放数据包"""
+                if self.routers[data.get_start()].datasize - self.routers[data.get_start()].cache >= data.size:
+                    data.shortest_path = nx.dijkstra_path(self.dynamic_graph, data.get_start(), data.get_goal())
+                    self.routers[data.shortest_path[0]].put_receive_queue(data)  # 将数据包放入起始路由器中
+                    self.total_data_number += 1
+        self.update_graph()  # 更新网络状态
+        """转发每个路由器中队首的数据包，放入链路中"""
+        for router in self.routers.values():
+            data = router.pop_send_queue()
+            if data is not None:
+                data.shortest_path = nx.dijkstra_path(self.dynamic_graph, router.sign, data.get_goal())
+                link = (data.shortest_path[0], data.shortest_path[1])
+                if link not in self.links.keys():
+                    link = (data.shortest_path[1], data.shortest_path[0])
+                self.links[link].put_data(data)
+        """将链路中的数据包转发到路由器上"""
+        for link in self.links.values():
+            data = link.pop_data()
+            if data is not None:
+                is_success_or_over = self.routers[data.shortest_path[1]].put_receive_queue(data,
+                old_state=data.shortest_path[data.count - 1])
+                if is_success_or_over[0]:
+                    self.success_data_number += 1
+                if is_success_or_over[1]:
+                    self.packet_for_record.add(data)

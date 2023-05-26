@@ -2,7 +2,7 @@ import random
 import time
 
 import numpy
-from 模拟网络.data import Data
+from 模拟网络.package import Data
 
 choose_list = [i for i in range(11)]
 data_number = 1000000

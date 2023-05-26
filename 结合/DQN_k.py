@@ -5,7 +5,7 @@ import networkx as nx
 import tensorflow as tf
 import numpy as np
 from 模拟网络.DQN import DQN
-from 模拟网络.利用network实现k最短路径算法 import k_shortest_paths
+from 模拟网络.K最短路径算法 import k_shortest_paths
 
 # Set the number of nodes and edges
 n = 12

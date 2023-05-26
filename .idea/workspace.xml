@@ -8,17 +8,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0641f1d-d74d-4c69-970c-f95a31e78ee7" name="变更" comment="主分支第十五次提交，更新了13个文件。本次更新为模拟网络文件包增添了全局的变量注解。（除了K最短路算法，因为我也不清楚其中变量的类型。）">
-      <change afterPath="$PROJECT_DIR$/模拟网络/model_6.h5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/模拟网络/model_7.h5" afterDir="false" />
+    <list default="true" id="f0641f1d-d74d-4c69-970c-f95a31e78ee7" name="变更" comment="分支-换图进行尝试-第十五次提交，略微修改了吞吐量计算的策略，修改了八个文件。">
+      <change afterPath="$PROJECT_DIR$/assets/af533a77417bd1f79194c0a7f1045bb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/模拟网络/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/模拟网络/Ospf_experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/Ospf_experiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/模拟网络/Rip_experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/Rip_experiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Test-speed-1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Test-speed-1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/模拟网络/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/模拟网络/dqn_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/dqn_network.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/模拟网络/dqn_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/dqn_train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/模拟网络/net.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/net.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/模拟网络/model_5.h5" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/model_5.h5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/模拟网络/ospf_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/ospf_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/模拟网络/rip_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/rip_network.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/模拟网络/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/router.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/模拟网络/利用network实现k最短路径算法.py" beforeDir="false" afterPath="$PROJECT_DIR$/模拟网络/利用network实现k最短路径算法.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/结合/DQN_k.py" beforeDir="false" afterPath="$PROJECT_DIR$/结合/DQN_k.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,11 +41,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="换图进行尝试" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -57,24 +76,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/迅雷下载/联邦学习/DQN&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/迅雷下载/联邦学习/DQN",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="Push.Settings">
+    <force-push-targets>
+      <force-push-target remote-path="origin" branch="换图进行尝试" />
+    </force-push-targets>
+  </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings>
@@ -87,14 +115,14 @@
       <recent name="C:\迅雷下载\联邦学习\DQN" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Twilght\Documents\GitHub\DQN\模拟网络" />
+      <recent name="C:\迅雷下载\联邦学习\DQN\K最短路径" />
+      <recent name="C:\迅雷下载\联邦学习\DQN\dqn" />
       <recent name="C:\迅雷下载\联邦学习\DQN" />
       <recent name="C:\迅雷下载\联邦学习\DQN\模拟网络" />
-      <recent name="C:\迅雷下载\联邦学习\DQN\结合" />
-      <recent name="C:\迅雷下载\联邦学习\DQN\DQN_2" />
-      <recent name="C:\迅雷下载\联邦学习\DQN\DQN-1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Rip_experiment">
+  <component name="RunManager" selected="Python.Ospf_experiment">
     <configuration name="Ospf_experiment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DQN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -141,7 +169,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Test-networkx-7" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Test-1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DQN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -155,9 +183,32 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/Test-networkx-7.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/Test-1.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="true" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test-torch-1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="DQN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Twilght\anaconda3\envs\DQN\python.exe" />
+      <option name="SDK_NAME" value="Python 3.9 (DQN)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/Test-torch-1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="true" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -180,14 +231,14 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="true" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="dqn_train (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="dqn_train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DQN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -210,43 +261,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ospf_network" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="DQN" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Twilght\anaconda3\envs\DQN\python.exe" />
-      <option name="SDK_NAME" value="Python 3.9 (DQN)" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/模拟网络" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/模拟网络/ospf_network.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="true" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.ospf_network" />
-      <item itemvalue="Python.Test-networkx-7" />
+      <item itemvalue="Python.Test-torch-1" />
+      <item itemvalue="Python.Test-1" />
+      <item itemvalue="Python.dqn_train" />
       <item itemvalue="Python.Ospf_experiment" />
       <item itemvalue="Python.Rip_experiment" />
-      <item itemvalue="Python.dqn_train (1)" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Rip_experiment" />
-        <item itemvalue="Python.dqn_train (1)" />
         <item itemvalue="Python.Ospf_experiment" />
-        <item itemvalue="Python.ospf_network" />
-        <item itemvalue="Python.Test-networkx-7" />
+        <item itemvalue="Python.Rip_experiment" />
+        <item itemvalue="Python.dqn_train" />
+        <item itemvalue="Python.Test-torch-1" />
+        <item itemvalue="Python.Test-1" />
       </list>
     </recent_temporary>
   </component>
@@ -308,6 +336,35 @@
       <workItem from="1676057752434" duration="71000" />
       <workItem from="1676262962924" duration="32843000" />
       <workItem from="1676558019660" duration="21000" />
+      <workItem from="1679483131840" duration="1928000" />
+      <workItem from="1679653692194" duration="19943000" />
+      <workItem from="1679677961724" duration="364000" />
+      <workItem from="1679708520664" duration="8113000" />
+      <workItem from="1679716905159" duration="1480000" />
+      <workItem from="1679719301701" duration="6121000" />
+      <workItem from="1679743258011" duration="10162000" />
+      <workItem from="1679801835032" duration="691000" />
+      <workItem from="1679810524536" duration="5104000" />
+      <workItem from="1679826754892" duration="2636000" />
+      <workItem from="1679830314895" duration="50093000" />
+      <workItem from="1680010444489" duration="17615000" />
+      <workItem from="1680098934062" duration="6624000" />
+      <workItem from="1680182196827" duration="6805000" />
+      <workItem from="1680264935900" duration="5085000" />
+      <workItem from="1680446535979" duration="4787000" />
+      <workItem from="1680522700132" duration="3142000" />
+      <workItem from="1680528139060" duration="789000" />
+      <workItem from="1680529936629" duration="1085000" />
+      <workItem from="1680531033021" duration="53000" />
+      <workItem from="1680531187621" duration="800000" />
+      <workItem from="1680537085008" duration="1605000" />
+      <workItem from="1680854490257" duration="11590000" />
+      <workItem from="1680932718055" duration="394000" />
+      <workItem from="1680956517437" duration="45000" />
+      <workItem from="1680957624479" duration="978000" />
+      <workItem from="1680958850013" duration="126000" />
+      <workItem from="1680959099056" duration="1100000" />
+      <workItem from="1681037946393" duration="5025000" />
     </task>
     <task id="LOCAL-00001" summary="初始化 74个文件。">
       <created>1675264049408</created>
@@ -393,11 +450,127 @@
       <option name="project" value="LOCAL" />
       <updated>1676049125898</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="换图并重构代码。增加六个文件，修改十个文件，删除七个文件">
+      <created>1679716956886</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1679716956886</updated>
+    </task>
+    <task id="LOCAL-00014" summary="分支-换图进行尝试-第二次提交，修复了关于Ospf动态性和计算丢包率的bug，修改了六个文件。">
+      <created>1679723546433</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1679723546433</updated>
+    </task>
+    <task id="LOCAL-00015" summary="分支-换图进行尝试-第三次提交，初步重构了DQN的代码，修改了八个文件，删除了一个文件。">
+      <created>1679757363761</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1679757363761</updated>
+    </task>
+    <task id="LOCAL-00016" summary="分支-换图进行尝试-第四次提交，正式重构了训练DQN的代码，修改了十个文件。">
+      <created>1679834388910</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1679834388910</updated>
+    </task>
+    <task id="LOCAL-00017" summary="分支-换图进行尝试-第五次提交，对细节进行了修改，修改了七个文件。">
+      <created>1679839221323</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1679839221323</updated>
+    </task>
+    <task id="LOCAL-00018" summary="分支-换图进行尝试-第六次提交，对细节进行了修改，训练出了一个DQN模型(意义不大)，修改了十个文件。添加了两个文件">
+      <created>1679926354507</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1679926354507</updated>
+    </task>
+    <task id="LOCAL-00019" summary="分支-换图进行尝试-第七次提交，对细节进行了修改，当路由器有容量的时候才放数据包，修改了九个文件。">
+      <created>1679931251997</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1679931251997</updated>
+    </task>
+    <task id="LOCAL-00020" summary="分支-换图进行尝试-第八次提交，对细节进行了修改，，修改了十五个文件，添加了两个文件。">
+      <created>1680010131916</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1680010131916</updated>
+    </task>
+    <task id="LOCAL-00021" summary="分支-换图进行尝试-第九次提交，对细节进行了修改，，修改了十五个文件，添加了三个文件。">
+      <created>1680104948879</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1680104948879</updated>
+    </task>
+    <task id="LOCAL-00022" summary="分支-换图进行尝试-第十次提交，对细节进行了修改，修改了十二个文件。">
+      <created>1680264981313</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1680264981313</updated>
+    </task>
+    <task id="LOCAL-00023" summary="分支-换图进行尝试-第十一次提交，对细节进行了修改，修改了十三个文件。">
+      <created>1680447244785</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1680447244785</updated>
+    </task>
+    <task id="LOCAL-00024" summary="分支-换图进行尝试-第十二次提交，修改了路由器的容量，修改了九个文件。">
+      <created>1680449489751</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1680449489752</updated>
+    </task>
+    <task id="LOCAL-00025" summary="分支-换图进行尝试-第十三次提交，在拥塞状态(少丢包或者不丢包)下训练了DQN，结果较为理想，修改了八个文件，添加了三个文件。最新模型为model_5。">
+      <created>1680523772381</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1680523772381</updated>
+    </task>
+    <task id="LOCAL-00026" summary="分支-换图进行尝试-第十四次提交，修改了吞吐量计算的策略，修改了十个文件。">
+      <created>1680862184333</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1680862184333</updated>
+    </task>
+    <task id="LOCAL-00027" summary="分支-换图进行尝试-第十五次提交，略微修改了吞吐量计算的策略，修改了八个文件。">
+      <created>1680932768471</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1680932768471</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -410,7 +583,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="HEAD" />
+                        <option value="换图进行尝试" />
                       </list>
                     </value>
                   </entry>
@@ -424,9 +597,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="初始化 74个文件。" />
-    <MESSAGE value="主分支第三次提交，修改了5个文件。" />
-    <MESSAGE value="主分支第四次提交，把readme.md文件移到最外层。" />
     <MESSAGE value="主分支第五次提交，更新了六个文件，成功进行基于马尔可夫的DQN训练。" />
     <MESSAGE value="主分支第六次提交，更新了五个文件。" />
     <MESSAGE value="主分支第七次提交，更新了12个文件。在DQN训练并寻路上取得了不错的数据。" />
@@ -436,7 +606,23 @@
     <MESSAGE value="主分支第十三次提交，更新了12个文件，添加了3个文件。本次更新的变化主要体现在修复了测试DQN优越性时的bug，修改了路由器最大存储量以及由此引发的一系列bug。" />
     <MESSAGE value="主分支第十四次提交，更新了4个文件，添加了3个文件。本次更新初步实现了OSPF算法的动态性。" />
     <MESSAGE value="主分支第十五次提交，更新了13个文件。本次更新为模拟网络文件包增添了全局的变量注解。（除了K最短路算法，因为我也不清楚其中变量的类型。）" />
-    <option name="LAST_COMMIT_MESSAGE" value="主分支第十五次提交，更新了13个文件。本次更新为模拟网络文件包增添了全局的变量注解。（除了K最短路算法，因为我也不清楚其中变量的类型。）" />
+    <MESSAGE value="换图并重构代码。增加六个文件，修改十个文件，删除七个文件" />
+    <MESSAGE value="分支-换图进行尝试-第二次提交，修复了关于Ospf动态性和计算丢包率的bug，修改了六个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第三次提交，初步重构了DQN的代码，修改了八个文件，删除了一个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第四次提交，正式重构了训练DQN的代码，修改了十个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第五次提交，对细节进行了修改，修改了七个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第六次提交，对细节进行了修改，训练出了一个DQN模型(意义不大)，修改了十个文件。添加了两个文件" />
+    <MESSAGE value="分支-换图进行尝试-第七次提交，对细节进行了修改，当路由器有容量的时候才放数据包，修改了九个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第八次提交，对细节进行了修改，，修改了十五个文件，添加了两个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第九次提交，对细节进行了修改，，修改了十五个文件，添加了三个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第十次提交，对细节进行了修改，修改了十二个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第十一次提交，对细节进行了修改，修改了十三个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第十二次提交，修改了路由器的容量，修改了九个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第十三次提交，在拥塞状态(少丢包或者不丢包)下训练了DQN，结果较为理想，修改了八个文件，添加了两个文件." />
+    <MESSAGE value="分支-换图进行尝试-第十三次提交，在拥塞状态(少丢包或者不丢包)下训练了DQN，结果较为理想，修改了八个文件，添加了三个文件。最新模型为model_5。" />
+    <MESSAGE value="分支-换图进行尝试-第十四次提交，修改了吞吐量计算的策略，修改了十个文件。" />
+    <MESSAGE value="分支-换图进行尝试-第十五次提交，略微修改了吞吐量计算的策略，修改了八个文件。" />
+    <option name="LAST_COMMIT_MESSAGE" value="分支-换图进行尝试-第十五次提交，略微修改了吞吐量计算的策略，修改了八个文件。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -467,50 +653,64 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DQN$rip_network.coverage" NAME="rip_network 覆盖结果" MODIFIED="1676032657220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test_DQN_6.coverage" NAME="Test-DQN-6 覆盖结果" MODIFIED="1673616528078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$dqn_test.coverage" NAME="dqn_test 覆盖结果" MODIFIED="1675675905299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test_normal__1_.coverage" NAME="Test_normal (1) 覆盖结果" MODIFIED="1675842708631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test.coverage" NAME="Test 覆盖结果" MODIFIED="1674308676293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test_all.coverage" NAME="Test-all 覆盖结果" MODIFIED="1674019689836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$Test_official.coverage" NAME="Test_official 覆盖结果" MODIFIED="1675342237776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test__2.coverage" NAME="Test-正态分布-2 覆盖结果" MODIFIED="1673592045484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$Test_tcp_4.coverage" NAME="Test-tcp-4 覆盖结果" MODIFIED="1673862271112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$Nature_DQN.coverage" NAME="Nature_DQN 覆盖结果" MODIFIED="1673872690213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DQN-1" />
-    <SUITE FILE_PATH="coverage/DQN$analyse.coverage" NAME="analyse 覆盖结果" MODIFIED="1674026523962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
-    <SUITE FILE_PATH="coverage/DQN$Test_draw_2.coverage" NAME="Test-draw-2 覆盖结果" MODIFIED="1675927567308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$QN.coverage" NAME="使用QN搜寻最短路 覆盖结果" MODIFIED="1673599954337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/QN-k最短路径" />
-    <SUITE FILE_PATH="coverage/DQN$dqn_train__1_.coverage" NAME="dqn_train (1) 覆盖结果" MODIFIED="1676352785504" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test_tcp_2.coverage" NAME="Test-tcp-2 覆盖结果" MODIFIED="1673766566452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
-    <SUITE FILE_PATH="coverage/DQN$Ospf_experiment.coverage" NAME="Ospf_experiment 覆盖结果" MODIFIED="1676352774783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$tcp_2__1_.coverage" NAME="tcp-2 (1) 覆盖结果" MODIFIED="1673756077664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/传输数据" />
-    <SUITE FILE_PATH="coverage/DQN$memory.coverage" NAME="memory 覆盖结果" MODIFIED="1674129882416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$Test_draw_4.coverage" NAME="Test-draw-4 覆盖结果" MODIFIED="1676027073423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$Rip_experiment.coverage" NAME="Rip_experiment 覆盖结果" MODIFIED="1676352793427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test__1.coverage" NAME="Test-正态分布-1 覆盖结果" MODIFIED="1673592003543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$DQN.coverage" NAME="DQN 覆盖结果" MODIFIED="1673856452702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DQN-1" />
-    <SUITE FILE_PATH="coverage/DQN$Test_draw_3.coverage" NAME="Test-draw-3 覆盖结果" MODIFIED="1675928083729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$Test_tcp_3.coverage" NAME="Test-tcp-3 覆盖结果" MODIFIED="1673755934399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$Comparative_experiment.coverage" NAME="Comparative_experiment 覆盖结果" MODIFIED="1675843121363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test_DQN_4.coverage" NAME="Test-DQN-4 覆盖结果" MODIFIED="1673608788358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$transfer__1_.coverage" NAME="transfer (1) 覆盖结果" MODIFIED="1673787067446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
-    <SUITE FILE_PATH="coverage/DQN$Test_random_1.coverage" NAME="Test-random-1 覆盖结果" MODIFIED="1675934558258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$demo3.coverage" NAME="demo3 覆盖结果" MODIFIED="1673859405571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
-    <SUITE FILE_PATH="coverage/DQN$Test_DQN_5.coverage" NAME="Test-DQN-5 覆盖结果" MODIFIED="1673615256533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$create_file.coverage" NAME="create_file 覆盖结果" MODIFIED="1674026225096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
-    <SUITE FILE_PATH="coverage/DQN$ospf_network.coverage" NAME="ospf_network 覆盖结果" MODIFIED="1676295363232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$router.coverage" NAME="router 覆盖结果" MODIFIED="1673764123165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
-    <SUITE FILE_PATH="coverage/DQN$Test_draw_5.coverage" NAME="Test-draw-5 覆盖结果" MODIFIED="1675931159432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$Test_QN_2.coverage" NAME="Test-QN-2 覆盖结果" MODIFIED="1672752570927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$networkk.coverage" NAME="利用network实现k最短路径算法 覆盖结果" MODIFIED="1673957915010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/K最短路径" />
-    <SUITE FILE_PATH="coverage/DQN$Test_DQN_7.coverage" NAME="Test-DQN-7 覆盖结果" MODIFIED="1675413438477" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$data.coverage" NAME="data 覆盖结果" MODIFIED="1674131709772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
-    <SUITE FILE_PATH="coverage/DQN$Test_speed_1.coverage" NAME="Test-speed-1 覆盖结果" MODIFIED="1675942859770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
-    <SUITE FILE_PATH="coverage/DQN$DQN_k.coverage" NAME="DQN_k 覆盖结果" MODIFIED="1674140212271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/结合" />
-    <SUITE FILE_PATH="coverage/DQN$Test_networkx_7.coverage" NAME="Test-networkx-7 覆盖结果" MODIFIED="1676052885380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
     <SUITE FILE_PATH="coverage/DQN$transfer.coverage" NAME="transfer 覆盖结果" MODIFIED="1674120750902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
-    <SUITE FILE_PATH="coverage/DQN$Test_transfer_1.coverage" NAME="Test_transfer_1 覆盖结果" MODIFIED="1673770564893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
-    <SUITE FILE_PATH="coverage/DQN$dqn_network.coverage" NAME="dqn_network 覆盖结果" MODIFIED="1674139432928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_draw_4.coverage" NAME="Test-draw-4 覆盖结果" MODIFIED="1676027073423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$create_file.coverage" NAME="create_file 覆盖结果" MODIFIED="1674026225096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/DQN$analyse.coverage" NAME="analyse 覆盖结果" MODIFIED="1674026523962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/DQN$Test_2.coverage" NAME="Test-2 覆盖结果" MODIFIED="1681570932095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_5.coverage" NAME="Test-5 覆盖结果" MODIFIED="1681744984015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$ospf_network.coverage" NAME="ospf_network 覆盖结果" MODIFIED="1680100723469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_DQN_4.coverage" NAME="Test-DQN-4 覆盖结果" MODIFIED="1673608788358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$DQN_k.coverage" NAME="DQN_k 覆盖结果" MODIFIED="1674140212271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/结合" />
+    <SUITE FILE_PATH="coverage/DQN$router.coverage" NAME="router 覆盖结果" MODIFIED="1673764123165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/DQN$Test_simpy_1.coverage" NAME="Test-simpy-1 覆盖结果" MODIFIED="1681484912490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_DQN_7.coverage" NAME="Test-DQN-7 覆盖结果" MODIFIED="1675413438477" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$dqn_train.coverage" NAME="dqn_train 覆盖结果" MODIFIED="1681042713751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_torch_1.coverage" NAME="Test-torch-1 覆盖结果" MODIFIED="1680958856802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_1.coverage" NAME="Test-1 覆盖结果" MODIFIED="1680451450047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_random_1.coverage" NAME="Test-random-1 覆盖结果" MODIFIED="1675934558258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_simpy_2.coverage" NAME="Test-simpy-2 覆盖结果" MODIFIED="1681485150947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$memory.coverage" NAME="memory 覆盖结果" MODIFIED="1674129882416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_speed_1.coverage" NAME="Test-speed-1 覆盖结果" MODIFIED="1675942859770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Ospf_experiment.coverage" NAME="Ospf_experiment 覆盖结果" MODIFIED="1681484831650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_draw_3.coverage" NAME="Test-draw-3 覆盖结果" MODIFIED="1675928083729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_tcp_4.coverage" NAME="Test-tcp-4 覆盖结果" MODIFIED="1673862271112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$DQN.coverage" NAME="DQN 覆盖结果" MODIFIED="1673856452702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DQN-1" />
+    <SUITE FILE_PATH="coverage/DQN$Test.coverage" NAME="Test 覆盖结果" MODIFIED="1677830070363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/结合" />
     <SUITE FILE_PATH="coverage/DQN$Test_offical.coverage" NAME="Test_offical 覆盖结果" MODIFIED="1675246212478" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Rip_experiment.coverage" NAME="Rip_experiment 覆盖结果" MODIFIED="1681043147874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$test_2.coverage" NAME="test_2 覆盖结果" MODIFIED="1679754827173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_draw_2.coverage" NAME="Test-draw-2 覆盖结果" MODIFIED="1675927567308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_DQN_6.coverage" NAME="Test-DQN-6 覆盖结果" MODIFIED="1673616528078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_QN_2.coverage" NAME="Test-QN-2 覆盖结果" MODIFIED="1672752570927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$data.coverage" NAME="data 覆盖结果" MODIFIED="1674131709772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_tcp_3.coverage" NAME="Test-tcp-3 覆盖结果" MODIFIED="1673755934399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test__2.coverage" NAME="Test-正态分布-2 覆盖结果" MODIFIED="1673592045484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_DQN_5.coverage" NAME="Test-DQN-5 覆盖结果" MODIFIED="1673615256533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test_transfer_1.coverage" NAME="Test_transfer_1 覆盖结果" MODIFIED="1673770564893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/DQN$Test_networkx_7.coverage" NAME="Test-networkx-7 覆盖结果" MODIFIED="1676052885380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$test_1.coverage" NAME="test_1 覆盖结果" MODIFIED="1680449261990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$QN.coverage" NAME="使用QN搜寻最短路 覆盖结果" MODIFIED="1673599954337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/QN-k最短路径" />
+    <SUITE FILE_PATH="coverage/DQN$Test_official.coverage" NAME="Test_official 覆盖结果" MODIFIED="1675342237776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$networkk.coverage" NAME="利用network实现k最短路径算法 覆盖结果" MODIFIED="1673957915010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/K最短路径" />
+    <SUITE FILE_PATH="coverage/DQN$graph_test.coverage" NAME="graph_test 覆盖结果" MODIFIED="1680008907070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$transfer__1_.coverage" NAME="transfer (1) 覆盖结果" MODIFIED="1673787067446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/DQN$Test_3.coverage" NAME="Test-3 覆盖结果" MODIFIED="1681571470048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Test__1.coverage" NAME="Test-正态分布-1 覆盖结果" MODIFIED="1673592003543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$dqn_train__1_.coverage" NAME="dqn_train (1) 覆盖结果" MODIFIED="1677900193154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Comparative_experiment.coverage" NAME="Comparative_experiment 覆盖结果" MODIFIED="1675843121363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_4.coverage" NAME="Test-4 覆盖结果" MODIFIED="1681741925148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$dqn_test.coverage" NAME="dqn_test 覆盖结果" MODIFIED="1679678034425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_all.coverage" NAME="Test-all 覆盖结果" MODIFIED="1674019689836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$Nature_DQN.coverage" NAME="Nature_DQN 覆盖结果" MODIFIED="1673872690213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DQN-1" />
+    <SUITE FILE_PATH="coverage/DQN$dqn_network.coverage" NAME="dqn_network 覆盖结果" MODIFIED="1674139432928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$main.coverage" NAME="main 覆盖结果" MODIFIED="1682329560074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DQN$rip_network.coverage" NAME="rip_network 覆盖结果" MODIFIED="1676032657220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$Test_draw_5.coverage" NAME="Test-draw-5 覆盖结果" MODIFIED="1675931159432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/DQN$k_short_path.coverage" NAME="k_short_path 覆盖结果" MODIFIED="1679661577315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/K最短路径" />
+    <SUITE FILE_PATH="coverage/DQN$Test_normal__1_.coverage" NAME="Test_normal (1) 覆盖结果" MODIFIED="1675842708631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/模拟网络" />
+    <SUITE FILE_PATH="coverage/DQN$tcp_2__1_.coverage" NAME="tcp-2 (1) 覆盖结果" MODIFIED="1673756077664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/传输数据" />
+    <SUITE FILE_PATH="coverage/DQN$demo3.coverage" NAME="demo3 覆盖结果" MODIFIED="1673859405571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
+    <SUITE FILE_PATH="coverage/DQN$Test_tcp_2.coverage" NAME="Test-tcp-2 覆盖结果" MODIFIED="1673766566452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data" />
   </component>
 </project>
